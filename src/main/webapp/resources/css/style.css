@@ -1,0 +1,139 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	background-color: #87CEEB;
+	font-size: 12px;
+}
+
+#maindiv {
+	padding: 10px;
+	margin-top: 5px;
+	background-color: white;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+
+/*#maindiv {
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	padding: 10px;
+	width: 70%;
+	background-color: white;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}*/
+
+#header {
+	height: 50px;
+	width: 100%;
+	background-color: white;
+}
+
+#menuandsearch{
+	width: 100%;
+	/*background-color: #157FCC;
+	border:1px solid #336699;
+	float: right;*/
+	border-radius:4px;
+	margin-bottom: 5px;
+	
+}
+
+/*override the bootstrap styling*/
+label{
+	font-weight: normal;
+}
+
+.form-control{
+	height:30px;
+	padding:6px 12px;
+	font-size:inherit;
+}
+
+.popover{
+	min-width: 220px;
+}
+
+.item {
+	
+	clear: both;
+	height: 1px;
+	
+	background-color: red;
+	
+}
+
+.panel-title{
+	font-size: 12px;
+	font-weight: bold;
+	
+}
+
+.panel-body{
+	word-wrap: break-word;
+}
+
+.row .row{
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.btn{
+	font-weight: normal;
+}
+/*end of override for bootstrap styling*/
+
+.message{
+	margin-top: 10px;
+	margin-bottom: 5px;
+	display: none;
+	line-height: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+/*.message h1, h2, h3, h4, h5, h6{
+	font-size: small;	
+	color: blue;
+	
+}*/
+
+textarea{
+	height: 60px;
+	max-height: 70px;
+	max-width: 200px;
+}
+
+legend{
+	font-size: inherit;
+	font-weight: bold;
+}
+
+
+#container{
+	width: 100%;
+	left: 0;
+	margin-bottom: 140px;
+	background-color: red;
+}
+
+.inline-header{
+	margin-right: 5px;
+	font-weight: bold;
+}
+
+a.edit-link, a.edit-link:hover{
+	cursor: pointer;
+	color: white;
+}
+
+.ivory-grid{
+	margin-bottom: 10px;
+	min-height: 80px;
+}
+
+.blue{
+	color: #428BCA;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Default Connection</comment>
+<entry key="uuid">055de703-2faa-4f7f-a1be-c005c2d00c82</entry>
+<entry key="port">3306</entry>
+<entry key="autoCommit">true</entry>
+<entry key="adapterId">MYSQL</entry>
+<entry key="customJdbcConnectString">jdbc:mysql://localhost:3306/ivory</entry>
+<entry key="userName">root</entry>
+<entry key="displayName">root@localhost/ivory</entry>
+<entry key="last_connected">1374900157628</entry>
+<entry key="restore_state">false</entry>
+<entry key="db">ivory</entry>
+<entry key="host">localhost</entry>
+</properties>

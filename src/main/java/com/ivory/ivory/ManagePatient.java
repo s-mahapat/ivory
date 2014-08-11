@@ -23,6 +23,25 @@ import com.ivory.ivory.beans.MedicalHistory;
  * 
  */
 public class ManagePatient {
+	
+	public Patient addPatient(Patient patient){
+		Session session = Hbutil.getSessionFactory().openSession();
+		Transaction tx = null;
+		Patient newpatient = null;
+		try {
+			tx = session.beginTransaction();
+			session.save(patient);
+			tx.commit();
+			newpatient = patient;
+		}catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return newpatient;
+	}
 
 	/* Method to CREATE an patient in the database */
 	public Integer addPatient(String fname, String lname, String email, String address, String dob, String gender, String phone, String mobile, Map<Integer, String> medicalHistory) {
@@ -75,8 +94,8 @@ public class ManagePatient {
 		try{ 
 			tx = session.beginTransaction();
 			// Add restriction.
-			Criterion fnameCr = Restrictions.like("firstName", searchString, MatchMode.ANYWHERE);
-			Criterion lnameCr = Restrictions.like("lastName", searchString, MatchMode.ANYWHERE);
+			Criterion fnameCr = Restrictions.like("fname", searchString, MatchMode.ANYWHERE);
+			Criterion lnameCr = Restrictions.like("lname", searchString, MatchMode.ANYWHERE);
 			Criterion mobileCr = Restrictions.like("mobile", searchString, MatchMode.EXACT);						
 			Criterion emailCr = Restrictions.like("email", searchString, MatchMode.EXACT);
 			Criterion completeCr = Restrictions.disjunction().add(fnameCr).add(lnameCr).add(mobileCr).add(emailCr);

@@ -10,10 +10,11 @@
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" type="image/x-icon"/>
 <title><tiles:getAsString name="title" /></title>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib/angular-route.min.js"></script>
+<script src="//code.angularjs.org/1.2.21/angular-route.js"></script>
+<script src="//code.angularjs.org/1.2.21/angular-resource.js"></script>
+<jsp:include page="jquery.jsp"></jsp:include>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ivory.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers.js"></script>
-<jsp:include page="jquery.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>

@@ -8,6 +8,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * @author smahapat
  * 
@@ -31,7 +33,7 @@ public class Patient {
 		this.lname = lname;
 		this.email = email;
 		this.address = address;
-		this.dob = this.stringToDate(dob);
+		this.dob = stringToDate(dob);
 		this.gender = gender;
 		this.phone = phone;
 		this.mobile = mobile;
@@ -45,19 +47,19 @@ public class Patient {
 		this.id = id;
 	}
 
-	public String getFirstName() {
+	public String getFname() {
 		return fname;
 	}
 
-	public void setFirstName(String first_name) {
+	public void setFname(String first_name) {
 		this.fname = first_name;
 	}
 
-	public String getLastName() {
+	public String getLname() {
 		return lname;
 	}
 
-	public void setLastName(String last_name) {
+	public void setLname(String last_name) {
 		this.lname = last_name;
 	}
 	

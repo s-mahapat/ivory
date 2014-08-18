@@ -7,16 +7,11 @@
 <html lang="en" ng-app="ivory">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/favicon.ico"
+	type="image/x-icon" />
 <title><tiles:getAsString name="title" /></title>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
-<script src="//code.angularjs.org/1.2.21/angular-route.js"></script>
-<script src="//code.angularjs.org/1.2.21/angular-resource.js"></script>
 <jsp:include page="jquery.jsp"></jsp:include>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ivory.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body>
 	<div id="maindiv" class="container">
@@ -27,15 +22,12 @@
 			<tiles:insertAttribute name="menu" />
 		</div>
 		<div id="bodydiv" class="row">
-			<tiles:insertAttribute name="body" />
+			<%--<tiles:insertAttribute name="body" />--%>
 			<div ng-view></div>
 		</div>
-		<div id="errormessage"
-			class="alert alert-error alert-block fade in message">
-			<button type="button" class="close"
-				onclick="$('#errormessage').hide()">&times;</button>
-			<h4 id="alert-header" class="alert-heading"></h4>
-			<p id="alert-text" class="alert-body"></p>
+		<div id="statusmessage" class="alert"
+			role="alert">
+			<span id="alert-text"></span>
 		</div>
 	</div>
 	<div id="footer">

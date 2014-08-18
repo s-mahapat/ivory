@@ -1,27 +1,50 @@
 /**
  * 
  */
-var patientControllers = angular.module('patientControllers', []);
-//var patient = $resource('/rest/patient/:id', {id:'@id'});
-patientControllers.controller('NewPatientController', [ '$scope', '$http',
-		'$filter', '$location', function($scope, $http, $filter, $location) {
-			/*
-			 * $http.get('rest/patient/medical_history_questions').success(
-			 * function(data, status, headers, config) {
-			 * $scope.medical_history_questions = data; }).error(function(data,
-			 * status, headers, config) { // log error $scope.history = {}; });
-			 */
+var searchControllers = angular.module('searchControllers', []);
+searchControllers.controller('PatientSearchResultsController', [
+		'$scope',
+		'$routeParams',
+		'PatientResource',
+		'DTOptionsBuilder',
+		'DTColumnDefBuilder',
+		function($scope, $routeParams, patientResource, DTOptionsBuilder,
+				DTColumnDefBuilder) {
+			$scope.term = $routeParams.term;
+			$scope.patients = patientResource.query({
+				term : $routeParams.term
+			});
+			$scope.dtOptions = DTOptionsBuilder.newOptions()
+					.withPaginationType('full_numbers').withBootstrap().withDisplayLength(25);
+			$scope.dtColumnDefs = [ DTColumnDefBuilder.newColumnDef(0),
+					DTColumnDefBuilder.newColumnDef(1).notSortable(),
+					DTColumnDefBuilder.newColumnDef(2).notSortable(),
+					DTColumnDefBuilder.newColumnDef(3).notSortable()];
+		} ]);
+searchControllers.controller('PatientSearchController', [ '$scope',
+		'$location', function($scope, $location) {
+			$scope.submit = function() {
+				$location.url("patient/search/" + $scope.term);
+			};
+		} ]);
 
+var patientControllers = angular.module('patientControllers', []);
+
+patientControllers.controller('NewPatientController', [
+		'$scope',
+		'$http',
+		'$location',
+		'PatientResource',
+		function($scope, $http, $location, patientRes) {
 			$scope.submitForm = function() {
-				$http({
-					url : "rest/patient",
-					data : $scope.patient,
-					method : 'POST',
-				}).success(function(data) {
-					console.log("OK", data);
-					$location.path('patient/details/' + data.id);
-				}).error(function(err) {
-					"ERR", console.log(err);
+				patientRes.save(null, $scope.patient, function(value,
+						responseHeaders) {
+					// success callback
+					$location.url("patient/details/" + value.id);
+				}, function(httpResponse) {
+					// error callback
+					showErrorMessage('Failed to create patient. '
+							+ httpResponse.statusText);
 				});
 			};
 
@@ -29,9 +52,60 @@ patientControllers.controller('NewPatientController', [ '$scope', '$http',
 
 );
 
-patientControllers.controller('PatientController', [ '$scope', '$http',
-		'$routeParams', function($scope, $http, $routeParams) {
+patientControllers.controller('EditPatientController', [
+		'$scope',
+		'$http',
+		'$routeParams',
+		'$location',
+		'PatientResource',
+		function($scope, $http, $routeParams, $location, patientRes) {
+			patientid = $routeParams.id;
+			$scope.patient = {};
+			patient = patientRes.get({
+				id : patientid
+			}, function(value, responseHeaders) {
+				// success callback
+				$scope.patient = patient;
+			}, function(httpResponse) {
+				// error callback
+				showErrorMessage('Failed to update patient. '
+						+ httpResponse.statusText);
+			});
+
+			$scope.submitForm = function() {
+				patientRes.update({
+					id : patientid
+				}, $scope.patient, function(value, responseHeaders) {
+					// success callback
+					$location.url("patient/details/" + value.id);
+				}, function(httpResponse) {
+					// error callback
+					showErrorMessage('Failed to update patient. '
+							+ httpResponse.statusText);
+				});
+
+			};
+
+		} ]);
+
+patientControllers.controller('PatientController', [
+		'$scope',
+		'$http',
+		'$routeParams',
+		'PatientResource',
+		function($scope, $http, $routeParams, patientRes) {
 			$scope.patientid = $routeParams.id;
+			$scope.patient = {};
+			patient = patientRes.get({
+				id : $scope.patientid
+			}, function(value, responseHeaders) {
+				// success callback
+				$scope.patient = patient;
+			}, function(httpResponse) {
+				showErrorMessage('Failed to get patient. '
+						+ httpResponse.statusText);
+			});
+
 		} ]);
 
 var doctorControllers = angular.module('doctorControllers', []);

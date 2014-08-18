@@ -1,4 +1,5 @@
-var ivoryApp = angular.module('ivory', ['ui.date','ngRoute','ngResource','patientControllers', 'doctorControllers']);
+var ivoryApp = angular.module('ivory', [ 'ngRoute', 'ngResource', 'datatables',
+		'patientControllers', 'doctorControllers', 'ivory.services', 'searchControllers' ]);
 
 ivoryApp.config(function($routeProvider, $locationProvider) {
 	$routeProvider.when('/registration/patient', {
@@ -10,8 +11,14 @@ ivoryApp.config(function($routeProvider, $locationProvider) {
 	}).when('/patient/details/:id', {
 		templateUrl : 'resources/partials/patient_details.html',
 		controller : 'PatientController'
+	}).when('/patient/edit/:id', {
+		templateUrl : 'resources/partials/patient_registration.html',
+		controller : 'EditPatientController'
+	}).when('/patient/search/:term',{
+		templateUrl : 'resources/partials/search_results.html',
+		controller : 'PatientSearchResultsController'
 	});
-	
-	//routing DOESN'T work without html5Mode
-    //$locationProvider.html5Mode(true);
+
+	// routing DOESN'T work without html5Mode
+	// $locationProvider.html5Mode(true);
 });

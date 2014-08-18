@@ -1,17 +1,13 @@
-<div class="row">
-	<div class="col-lg-10">
-		<div id="user_toolbar" class="pull-right">
-			<a href="#" data-toggle="modal" data-target="#treatment_plan_dialog"><span
-				class="glyphicon glyphicon-plus-sign blue"></span></a> <a href="#"><span
-				class="glyphicon glyphicon-minus-sign blue"></span></a>
+<div>
+	<div class="col-lg-2">
+		<div class="list-group">
+			<a href="javascript:void();" ng-click="details.view = 1" ng-model="details.view" ng-value="1" class="list-group-item">Dashboard</a>
+			<a href="javascript:void();"	ng-click="details.view = 2" ng-model="details.view" ng-value="2" class="list-group-item">Appointments</a>
 		</div>
-		<div class="row"></div>
-		<div class="">
-			<div id="treatment_history_grid" class="ivory-grid"></div>
-		</div>
-		<div>
-			<div id="new_treatment_grid" class="ivory-grid"></div>
-		</div>
+	</div>
+	<div class="col-lg-8" ng-switch on="details.view">
+		<div class="panel panel-primary" ng-switch-default>Dashboard</div>
+		<div class="panel panel-primary" ng-switch-when="2">App</div>
 	</div>
 	<div class="col-lg-2">
 		<div class="panel panel-primary">
@@ -20,19 +16,25 @@
 		</div>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<span class="panel-title">Personal Info</span> <a href="#"
-					class="edit-link" title="Edit"><i
+				<span class="panel-title">Personal Info</span> <a
+					href="#/patient/edit/{{patient.id}}" class="edit-link" title="Edit"><i
 					class="glyphicon glyphicon-pencil pull-right"></i></a>
 			</div>
-			<div class="panel-body" id="personalinfo">{{patientid}}</div>
+			<div class="panel-body" id="personalinfo">
+				<address>
+					{{patient.fname}}&nbsp;{{patient.lname}}<br> <br>
+					{{patient.address}}<br> Gender: {{patient.gender}}<br> <strong>Mobile:</strong>{{patient.mobile}}<br>
+					<strong>Phone:</strong>{{patient.phone}}<br> <a
+						href="mailto:{{patient.email}}">{{patient.email}}</a><br>
+				</address>
+			</div>
 		</div>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<span class="panel-title">Address</span> <a href="#"
-					class="edit-link" title="Edit"><i
-					class="glyphicon glyphicon-pencil pull-right"></i></a>
+				<span class="panel-title"></span> <a href="#" class="edit-link"
+					title="Edit"><i class="glyphicon glyphicon-pencil pull-right"></i></a>
 			</div>
-			<div class="panel-body" id="address"></div>
+			<div class="panel-body" id=""></div>
 		</div>
 	</div>
 </div>

@@ -25,7 +25,7 @@
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="phone">Phone</label>
 			<div class="col-lg-8">
-				<input class="form-control" type="text" id="phone" name="phone"
+				<input class="form-control" type="tel" id="phone" name="phone"
 					placeholder="Phone" autocomplete="off" ng-model="patient.phone">
 			</div>
 		</div>
@@ -49,9 +49,9 @@
 			<label class="control-label col-lg-3" for="gender">Gender</label>
 			<div class="btn-group col-lg-8">
 				<label class="radio-inline"> <input type="radio"
-					name="gender" ng-model="patient.gender" value="M">M
+					name="gender" ng-model="patient.gender" value="M" ng-required="!patient.gender">M
 				</label> <label class="radio-inline"> <input type="radio"
-					name="gender" ng-model="patient.gender" value="F">F
+					name="gender" ng-model="patient.gender" value="F" ng-required="!patient.gender">F
 				</label>
 			</div>
 		</div>

@@ -15,7 +15,7 @@ searchControllers.controller('PatientSearchResultsController', [
 				term : $routeParams.term
 			});
 			$scope.dtOptions = DTOptionsBuilder.newOptions()
-					.withPaginationType('full_numbers').withBootstrap().withDisplayLength(25);
+					.withPaginationType('full_numbers').withBootstrap().withDisplayLength(10);
 			$scope.dtColumnDefs = [ DTColumnDefBuilder.newColumnDef(0),
 					DTColumnDefBuilder.newColumnDef(1).notSortable(),
 					DTColumnDefBuilder.newColumnDef(2).notSortable(),

@@ -1,33 +1,8 @@
 /**
  * 
  */
-var searchControllers = angular.module('searchControllers', []);
-searchControllers.controller('PatientSearchResultsController', [
-		'$scope',
-		'$routeParams',
-		'PatientResource',
-		'DTOptionsBuilder',
-		'DTColumnDefBuilder',
-		function($scope, $routeParams, patientResource, DTOptionsBuilder,
-				DTColumnDefBuilder) {
-			$scope.term = $routeParams.term;
-			$scope.patients = patientResource.query({
-				term : $routeParams.term
-			});
-			$scope.dtOptions = DTOptionsBuilder.newOptions()
-					.withPaginationType('full_numbers').withBootstrap().withDisplayLength(10);
-			$scope.dtColumnDefs = [ DTColumnDefBuilder.newColumnDef(0),
-					DTColumnDefBuilder.newColumnDef(1).notSortable(),
-					DTColumnDefBuilder.newColumnDef(2).notSortable(),
-					DTColumnDefBuilder.newColumnDef(3).notSortable()];
-		} ]);
-searchControllers.controller('PatientSearchController', [ '$scope',
-		'$location', function($scope, $location) {
-			$scope.submit = function() {
-				$location.url("patient/search/" + $scope.term);
-			};
-		} ]);
 
+/* Patient controllers */
 var patientControllers = angular.module('patientControllers', []);
 
 patientControllers.controller('NewPatientController', [
@@ -101,11 +76,42 @@ patientControllers.controller('PatientController', [
 			}, function(value, responseHeaders) {
 				// success callback
 				$scope.patient = patient;
+				$scope.patient.treatmentplans = [ {
+					"id" : 1,
+					"date" : "02/08/2014",
+					"treatment" : "Root Canal",
+					"details": [{"id": 1.1, "description": "Test2"}],
+				}, {
+					"id" : 2,
+					"date" : "02/08/2012",
+					"treatment" : "Root Canal2",
+					"details": [{"id": 2.1, "description": "Test12"}],
+				} ];
 			}, function(httpResponse) {
 				showErrorMessage('Failed to get patient. '
 						+ httpResponse.statusText);
 			});
-
+			$scope.initCollapse = function(){
+				$scope.dataCollapseFlags = [];
+				for(var i=0; i<=$scope.patient.treatmentplans.length; i++){
+					$scope.dataCollapseFlags.push(false);
+				}
+			};
+			$scope.selectRow = function(index){
+				// check if its not initialized yet
+				if(typeof $scope.dataCollapseFlags == 'undefined'){
+					$scope.initCollapse();
+				}
+				// if the row is already selected, collapse the row
+				if($scope.dataCollapseFlags[index] == true){
+					$scope.dataCollapseFlags[index] = false;
+				}else{
+					// if the row is collapsed, collapse any open rows and then expand this row
+					$scope.initCollapse();
+					$scope.dataCollapseFlags[index] = true;
+				}
+				
+			};
 		} ]);
 
 var doctorControllers = angular.module('doctorControllers', []);

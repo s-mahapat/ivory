@@ -46,3 +46,7 @@ a.edit-link,a.edit-link:hover {
 .ngViewport.ng-scope {
 	height: 100% !important;
 }
+
+.ivory-expandable-row{
+	cursor: pointer;
+}

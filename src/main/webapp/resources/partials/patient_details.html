@@ -1,13 +1,20 @@
+<script type="text/javascript">
+
+</script>
 <div>
 	<div class="col-lg-2">
 		<div class="list-group">
-			<a href="javascript:void();" ng-click="details.view = 1" ng-model="details.view" ng-value="1" class="list-group-item">Dashboard</a>
-			<a href="javascript:void();"	ng-click="details.view = 2" ng-model="details.view" ng-value="2" class="list-group-item">Appointments</a>
+			<a href="javascript:void();" ng-click="details.view = 1"
+				ng-model="details.view" ng-value="1" class="list-group-item">Dashboard</a>
+			<a href="javascript:void();" ng-click="details.view = 2"
+				ng-model="details.view" ng-value="2" class="list-group-item">Appointments</a>
 		</div>
 	</div>
 	<div class="col-lg-8" ng-switch on="details.view">
 		<div class="panel panel-primary" ng-switch-default>Dashboard</div>
-		<div class="panel panel-primary" ng-switch-when="2">App</div>
+		<div ng-switch-when="2">
+			<ng-include src="'resources/partials/patient_appointment_history.html'"></ng-include>
+		</div>
 	</div>
 	<div class="col-lg-2">
 		<div class="panel panel-primary">

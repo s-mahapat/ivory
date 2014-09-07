@@ -1,0 +1,54 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">Appointment History</div>
+	<div class="panel-body" id="appointments">
+		<!-- Table -->
+		<table class="table table-striped table-condensed table-bordered">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Date</th>
+					<th>Treatment</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="treatment_plan in patient.treatmentplans">
+				<tr ng-click="selectRow($index)" class="ivory-expandable-row">
+					<td>{{treatment_plan.id}}</td>
+					<td>{{treatment_plan.date}}</td>
+					<td>{{treatment_plan.treatment}}</td>
+				</tr>
+				<tr ng-switch on="dataCollapseFlags[$index]"> 
+					<td colspan="3" ng-switch-when="true">
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="detail in patient.treatmentplans[$index].details">
+									<td>{{detail.id}}</td>
+									<td>{{detail.description}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="panel-footer">
+		<div class="btn-group">
+			<button type="button" class="btn btn-default btn-xs">
+				<span class="glyphicon glyphicon-plus-sign"></span>
+			</button>
+			<button type="button" class="btn btn-default btn-xs">
+				<span class="glyphicon glyphicon-minus-sign"></span>
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-body">Basic panel example</div>
+</div>

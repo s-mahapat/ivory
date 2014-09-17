@@ -3,19 +3,25 @@
 </script>
 <div>
 	<div class="col-lg-2">
-		<div class="list-group">
-			<a href="javascript:void();" ng-click="details.view = 1"
-				ng-model="details.view" ng-value="1" class="list-group-item">Dashboard</a>
-			<a href="javascript:void();" ng-click="details.view = 2"
-				ng-model="details.view" ng-value="2" class="list-group-item">Appointments</a>
+		<div class="list-group" ng-init="details.view = 1; dashboard = 1">
+			<a href="" ng-click="details.view = 1;dashboard = 1; appointments = 0"
+				ng-model="dashboard" class="list-group-item" ng-class="{active: dashboard}">Dashboard</a>
+			<a href="" ng-click="details.view = 2; dashboard = 0; appointments = 1"
+				ng-model="appointments" ng-value="2" class="list-group-item" ng-class="{active: appointments}">Appointments</a>
 		</div>
 	</div>
-	<div class="col-lg-8" ng-switch on="details.view">
+	<div class="col-lg-8" ng-if="details.view == 1">
+		<div class="panel panel-primary">Dashboard</div>
+	</div>
+	<div class="col-lg-8" ng-if="details.view == 2">
+		<ng-include src="'resources/partials/patient_appointment_history.html'"></ng-include>
+	</div>
+	<!-- <div class="col-lg-8" ng-switch on="details.view">
 		<div class="panel panel-primary" ng-switch-default>Dashboard</div>
 		<div ng-switch-when="2">
 			<ng-include src="'resources/partials/patient_appointment_history.html'"></ng-include>
 		</div>
-	</div>
+	</div> -->
 	<div class="col-lg-2">
 		<div class="panel panel-primary">
 			<div class="panel-heading"></div>
@@ -23,16 +29,16 @@
 		</div>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<span class="panel-title">Personal Info</span> <a
-					href="#/patient/edit/{{patient.id}}" class="edit-link" title="Edit"><i
+				<span class="">Personal Info</span>
+				<a href="#/patient/edit/{{patient.id}}" class="edit-link" title="Edit"><i
 					class="glyphicon glyphicon-pencil pull-right"></i></a>
 			</div>
 			<div class="panel-body" id="personalinfo">
 				<address>
-					{{patient.fname}}&nbsp;{{patient.lname}}<br> <br>
-					{{patient.address}}<br> Gender: {{patient.gender}}<br> <strong>Mobile:</strong>{{patient.mobile}}<br>
-					<strong>Phone:</strong>{{patient.phone}}<br> <a
-						href="mailto:{{patient.email}}">{{patient.email}}</a><br>
+					<strong>{{patient.fname}}&nbsp;{{patient.lname}}</strong><br> <br>
+					{{patient.address}}<br> Gender: {{patient.gender}}<br> <strong>Mobile: </strong>{{patient.mobile}}<br>
+					<strong>Phone: </strong>{{patient.phone}}<br> 
+					<a href="mailto:{{patient.email}}"><span class="ivory-email-link">{{patient.email}}</span></a><br>
 				</address>
 			</div>
 		</div>

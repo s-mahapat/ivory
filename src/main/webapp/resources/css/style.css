@@ -2,19 +2,19 @@
 
 body {
 	background-color: #87CEEB;
-	font-size: 12px;
+	font-size: 11px;
 }
 
 .container {
-	width: 85%;
+	width: 90%;
 }
 
 #maindiv {
 	padding: 10px;
 	margin-top: 5px;
 	background-color: white;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 
 #header {
@@ -30,6 +30,10 @@ body {
 	float: right;*/
 	border-radius: 4px;
 	margin-bottom: 5px;
+}
+
+.ivory-theme-color{
+	color: #428BCA;
 }
 
 a.edit-link,a.edit-link:hover {
@@ -49,4 +53,62 @@ a.edit-link,a.edit-link:hover {
 
 .ivory-expandable-row{
 	cursor: pointer;
+}
+
+table {
+  /*border-collapse: separate;*/
+  border-spacing: 0 0px;
+}
+
+.table tbody + tbody{
+	border-top: 1px solid #DDD;
+}
+
+
+tr td:first-child,
+tr th:first-child {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+tr td:last-child,
+tr th:last-child {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.inner-table tr th{
+	color: orange;
+}
+
+.inner-table tr th,
+.inner-table tr td{
+	cursor: pointer;
+}
+
+.row-expand-icon{
+	color: #428BCA;
+}
+
+.footer-pagination{
+	margin: -8px 0 0 0;
+}
+
+.ivory-email-link{
+	display: inline-block;
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;	
+}
+
+.ivory-input-xsm{
+	height: 25px;
+}
+
+.ivory-data-label{
+	font-weight: normal;
+}
+
+.rowselected{
+	background-color: #F5F5F5;
 }

@@ -71,6 +71,8 @@ patientControllers.controller('PatientController', [
 		function($scope, $http, $routeParams, patientRes) {
 			$scope.patientid = $routeParams.id;
 			$scope.patient = {};
+			$scope.selected_detail = {};
+			$scope.hide_details = true;
 			patient = patientRes.get({
 				id : $scope.patientid
 			}, function(value, responseHeaders) {
@@ -80,24 +82,43 @@ patientControllers.controller('PatientController', [
 					"id" : 1,
 					"date" : "02/08/2014",
 					"treatment" : "Root Canal",
-					"details": [{"id": 1.1, "description": "Test2"}],
+					"details": [{"id": 1.1, "description": "Test2", "date": "02/08/2014", remarks: "This is a test remarks and must go to the next line"}, {"id": 1.2, "description": "Test2.1", "date": "02/08/2014"}],
 				}, {
 					"id" : 2,
 					"date" : "02/08/2012",
 					"treatment" : "Root Canal2",
-					"details": [{"id": 2.1, "description": "Test12"}],
-				} ];
+					"details": [{"id": 2.1, "description": "Test12", "date": "02/08/2014"}, {"id": 1.2, "description": "Test2.1", "date": "02/08/2014"}],
+				},
+				{
+					"id" : 3,
+					"date" : "02/08/2012",
+					"treatment" : "Root Canal3",
+					"details": [{"id": 2.1, "description": "Test123"}, {"id": 1.2, "description": "Test2.1"}],
+				}, {
+					"id" : 4,
+					"date" : "02/08/2012",
+					"treatment" : "Root Canal4",
+					"details": [{"id": 2.1, "description": "Test1234"}, {"id": 1.2, "description": "Test2.1"}],
+				} , {
+					"id" : 5,
+					"date" : "02/08/2012",
+					"treatment" : "Root Canal5",
+					"details": [{"id": 2.1, "description": "Test12345"}, {"id": 1.2, "description": "Test2.1"}],
+				}  ];
 			}, function(httpResponse) {
 				showErrorMessage('Failed to get patient. '
 						+ httpResponse.statusText);
 			});
 			$scope.initCollapse = function(){
 				$scope.dataCollapseFlags = [];
-				for(var i=0; i<=$scope.patient.treatmentplans.length; i++){
+				for(var i=0; i<$scope.patient.treatmentplans.length; i++){
 					$scope.dataCollapseFlags.push(false);
 				}
 			};
 			$scope.selectRow = function(index){
+				$scope.detailCollapseFlags = [];
+				// always hide the lower pane and then reopen again
+				$scope.hide_details = true;
 				// check if its not initialized yet
 				if(typeof $scope.dataCollapseFlags == 'undefined'){
 					$scope.initCollapse();
@@ -111,6 +132,17 @@ patientControllers.controller('PatientController', [
 					$scope.dataCollapseFlags[index] = true;
 				}
 				
+			};
+			$scope.showDetail = function(treatment_plan_index, detail_index){
+				$scope.hide_details = false;
+				$scope.detailCollapseFlags = [];
+				$scope.selected_detail = $scope.patient.treatmentplans[treatment_plan_index].details[detail_index];
+				// set all elements to false
+				for(var i=0; i<$scope.patient.treatmentplans[treatment_plan_index].details.length; i++){
+					$scope.detailCollapseFlags.push(false);
+				}
+				// only the one selected is true, then it gets highlighted on the view
+				$scope.detailCollapseFlags[detail_index] = true;
 			};
 		} ]);
 

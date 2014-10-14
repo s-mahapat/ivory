@@ -1,6 +1,8 @@
 --* DEFINITION
 --*     SETUP "" --> "1.1"
 --*     UPGRADE "" --> "1.1.1"
+--*     UPGRADE "1.1.1" --> "1.1.2"
+--*     UPGRADE "1.1.2" --> "1.1.3"
 --* /DEFINITION
 
 
@@ -97,4 +99,21 @@ CREATE TABLE patient_medical_history
 );
 ALTER TABLE patient_medical_history ADD KEY unique_indx1 (patient_id, question_id);
 
+--* /UPGRADE
+
+--* UPGRADE "1.1.1" --> "1.1.2"
+CREATE TABLE `treatment_plans` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `patient_id` int(11) unsigned NOT NULL,
+  `description` varchar(45) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `treatment_plans_for_patient_idx` (`patient_id`),
+  CONSTRAINT `treatment_plans_for_patient` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Stores all treatment plans for a patient';
+
+--* /UPGRADE
+
+--* UPGRADE "1.1.2" --> "1.1.3"
+ALTER TABLE `ivory`.`treatment_plans` CHANGE COLUMN `description` `name` VARCHAR(45) NOT NULL ;
 --* /UPGRADE

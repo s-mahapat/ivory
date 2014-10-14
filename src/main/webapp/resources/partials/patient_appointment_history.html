@@ -1,5 +1,5 @@
 <div class="panel panel-primary">
-	<div class="panel-heading">Appointment History</div>
+	<div class="panel-heading">Treatment History</div>
 	<div class="panel-body" id="appointments">
 		<!-- Table -->
 		<table class="table table-condensed table-hover">
@@ -8,18 +8,20 @@
 					<th>&nbsp;</th>
 					<th>Sl No.</th>
 					<th>Start Date</th>
-					<th>Treatment</th>
+					<th>Name</th>
 					<th>Amount</th>
 					<th>Paid</th>
 					<th>Balance</th>
 				</tr>
 			</thead>
 			<tbody ng-repeat="treatment_plan in patient.treatmentplans">
-				<tr ng-init="plan_index=$index" ng-click="selectRow($index)" class="ivory-expandable-row" ng-class="{rowselected: dataCollapseFlags[$index]}">
+				<tr ng-init="plan_index=$index" ng-click="selectRow($index)"
+					class="ivory-expandable-row"
+					ng-class="{rowselected: dataCollapseFlags[$index]}">
 					<td><span class="glyphicon glyphicon-plus ivory-theme-color"></span></td>
 					<td>{{$index + 1}}</td>
 					<td>{{treatment_plan.date}}</td>
-					<td>{{treatment_plan.treatment}}</td>
+					<td>{{treatment_plan.name}}</td>
 					<td>{{dataCollapseFlags[$index]}}</td>
 					<td>{{plan_index}}</td>
 					<td>0</td>
@@ -40,7 +42,10 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr ng-repeat="detail in patient.treatmentplans[$index].details" ng-click="showDetail(plan_index, $index)" ng-class="{rowselected: detailCollapseFlags[$index]}">
+										<tr
+											ng-repeat="detail in patient.treatmentplans[$index].details"
+											ng-click="showDetail(plan_index, $index)"
+											ng-class="{rowselected: detailCollapseFlags[$index]}">
 											<td>{{$index + 1}}</td>
 											<td>{{detail.description}}</td>
 											<td>{{detail.date}}</td>
@@ -59,7 +64,8 @@
 	</div>
 	<div class="panel-footer">
 		<div class="btn-group">
-			<button title="New treatment plan" type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#new-treatment-plan-modal">
+			<button title="New treatment plan" type="button"
+				class="btn btn-default btn-xs" ng-click="addNew()">
 				<span class="glyphicon glyphicon-plus-sign ivory-theme-color"></span>
 			</button>
 			<button type="button" class="btn btn-default btn-xs">
@@ -80,58 +86,69 @@
 	</div>
 </div>
 
-<div ng-hide="hide_details" class="panel panel-default ng-hide">
-	<div class="panel-body">
-	<form class="form-horizontal" role="form">
-		<div class="form-group">
-		    <label class="col-lg-1">Date</label>
-		    <div class="col-lg-3">
-		      <label class="ivory-data-label">{{selected_detail.date}}</label>
-		    </div>
-		    <label class="col-lg-1">Description</label>
-		    <div class="col-lg-3">
-		      <label class="ivory-data-label">{{selected_detail.description}}</label>
-		    </div>
-		    <label class="col-lg-1">Remarks</label>
-		    <div class="col-lg-3">
-		      <label class="ivory-data-label">{{selected_detail.remarks}}</label>
-		    </div>
-	  	</div>
-	  	<div class="form-group">
-	  		<label class="col-lg-1">Doctor</label>
-		    <div class="col-lg-3">
-		      <label class="ivory-data-label">{{selected_detail.doctor}}</label>
-		    </div>
-	  	</div>
-	  	
-	</form>
+<div ng-switch on="lower_pane_view">
+	<!-- Hide this when the hide_details flag in the controller is set <div ng-switch-when="1" ng-hide="hide_details" class="panel panel-default ng-hide">-->
+	<div ng-switch-when="1" class="panel panel-default">
+		<div class="panel-body">
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<label class="col-lg-1">Date</label>
+					<div class="col-lg-3">
+						<label class="ivory-data-label">{{selected_detail.date}}</label>
+					</div>
+					<label class="col-lg-1">Description</label>
+					<div class="col-lg-3">
+						<label class="ivory-data-label">{{selected_detail.description}}</label>
+					</div>
+					<label class="col-lg-1">Remarks</label>
+					<div class="col-lg-3">
+						<label class="ivory-data-label">{{selected_detail.remarks}}</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-1">Doctor</label>
+					<div class="col-lg-3">
+						<label class="ivory-data-label">{{selected_detail.doctor}}</label>
+					</div>
+				</div>
+	
+			</form>
+		</div>
 	</div>
+	
+	<div ng-switch-when="2" class="panel panel-default">
+		<div class="panel-body">
+			<form class="form-horizontal" role="form" ng-submit="saveNewTreatmentPlan()">
+				<div class="col-lg-6">
+					<div class="form-group">
+						<label for="start-date" class="control-label col-lg-3">Start Date</label>
+						<div class="col-lg-5">
+						<input type="date" class="form-control input-sm" id="start-date"
+							placeholder="Start Date" disabled="disabled" ng-model="treatmentplan.date">
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="form-group">
+						<label for="treatment-plan-name" class="control-label col-lg-5">Treatment Plan Name</label>
+						<div class="col-lg-7">
+						<input type="text" class="form-control input-sm" id="treatment-plan-name"
+							placeholder="Treatment Plan Name" ng-model="treatmentplan.name">
+						</div>
+					</div>
+				</div>				
+				<div class="form-group">
+					<div class="col-lg-offset-10 col-lg-2">
+						<button id="submit" type="submit" class="btn btn-primary btn-xs">Save</button>
+						<button type="reset" class="btn btn-primary btn-xs">Reset</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div ng-switch-when="3" class="panel panel-default">
+		<ng-include src="'resources/partials/treatment_details.html'"></ng-include>
+	</div>	
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="new-treatment-plan-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">New Treatment Plan</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-        	<div class="form-group">
-			    <label for="start-date" class="col-lg-1">Start Date</label>
-			    <input type="date" class="form-control col-lg-3" id="start-date" placeholder="" disabled="disabled">
-			  </div>
-			  <div class="form-group">
-			    <label for="startDate" class="col-lg-1">Treatment Plan Name</label>
-			    <input type="text" class="form-control" id="startDate" placeholder="">
-			  </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+

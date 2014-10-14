@@ -10,7 +10,7 @@ ivoryApp.config(function($routeProvider, $locationProvider) {
 		controller : 'NewDoctorController'
 	}).when('/patient/details/:id', {
 		templateUrl : 'resources/partials/patient_details.html',
-		controller : 'PatientController'
+		controller : 'PatientDetailsController'
 	}).when('/patient/edit/:id', {
 		templateUrl : 'resources/partials/patient_registration.html',
 		controller : 'EditPatientController'
@@ -22,3 +22,7 @@ ivoryApp.config(function($routeProvider, $locationProvider) {
 	// routing DOESN'T work without html5Mode
 	// $locationProvider.html5Mode(true);
 });
+
+var Config = {
+	DATE_FORMAT: 'dd/MM/yyyy',
+};

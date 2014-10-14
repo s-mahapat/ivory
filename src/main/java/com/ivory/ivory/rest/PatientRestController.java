@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import com.google.gson.Gson;
 import com.ivory.ivory.beans.Patient;
+import com.ivory.ivory.beans.TreatmentPlan;
 import com.ivory.ivory.ManageMedicalHistory;
 import com.ivory.ivory.ManagePatient;
 import com.ivory.ivory.beans.MedicalHistoryQuestion;
@@ -59,12 +56,12 @@ public class PatientRestController {
 	public @ResponseBody List<Patient> SearchPatients(@RequestParam("term") String term) {
 		ManagePatient mp = new ManagePatient();
 		List<Patient> patients = mp.searchPatient(term);
-		/*JSONObject obj = new JSONObject();
-		obj.put("draw", new Integer(draw));
-		obj.put("recordsTotal", new Integer(100));
-		obj.put("recordsFiltered", new Integer(patients.size()));
-		obj.put("data", patients);
-		return obj.toString();*/
 		return patients;
+	}
+	
+	@RequestMapping(value="{patientid}/treatment/plan", method = RequestMethod.POST)
+	public TreatmentPlan SaveTreatmentPlan(@PathVariable int patientid, @RequestBody TreatmentPlan treatmentPlan){
+		ManagePatient mp = new ManagePatient();
+		return mp.saveTreatmentPlan(patientid, treatmentPlan);
 	}
 }

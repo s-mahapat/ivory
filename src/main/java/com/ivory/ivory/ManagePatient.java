@@ -16,6 +16,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.ivory.ivory.beans.Patient;
 import com.ivory.ivory.beans.MedicalHistory;
+import com.ivory.ivory.beans.TreatmentPlan;
 
 /**
  * @author smahapat
@@ -202,5 +203,26 @@ public class ManagePatient {
 			session.close();
 		}
 		return patient;
+	}
+	
+	public TreatmentPlan saveTreatmentPlan(int id, TreatmentPlan treatment_plan){
+		Session session = Hbutil.getSessionFactory().openSession();
+		Transaction tx = null;
+		TreatmentPlan tp = null;		
+		Patient patient = (Patient) session.get(Patient.class, id);
+		treatment_plan.setPatient(patient);
+		try {
+			tx = session.beginTransaction();
+			session.save(treatment_plan);
+			tx.commit();
+			tp = treatment_plan;
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return tp;
 	}
 }

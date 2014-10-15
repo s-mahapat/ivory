@@ -1,4 +1,4 @@
-package com.ivory.ivory.beans;
+package com.ivory.ivory.models;
 
 import java.util.Date;
 

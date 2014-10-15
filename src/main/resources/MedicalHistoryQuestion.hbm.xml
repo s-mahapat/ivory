@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="com.ivory.ivory.beans.MedicalHistoryQuestion" table="medical_history_questions">
+   <class name="com.ivory.ivory.models.MedicalHistoryQuestion" table="medical_history_questions">
       <meta attribute="class-description">
          This class contains the questions to ask in medical history. 
       </meta>

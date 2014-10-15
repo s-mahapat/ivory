@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.ivory.ivory.beans.Patient;
-import com.ivory.ivory.beans.TreatmentPlan;
+
 import com.ivory.ivory.ManageMedicalHistory;
 import com.ivory.ivory.ManagePatient;
-import com.ivory.ivory.beans.MedicalHistoryQuestion;
+import com.ivory.ivory.models.MedicalHistoryQuestion;
+import com.ivory.ivory.models.Patient;
+import com.ivory.ivory.models.TreatmentPlan;
 
 @RestController
 @RequestMapping("/rest/patient")

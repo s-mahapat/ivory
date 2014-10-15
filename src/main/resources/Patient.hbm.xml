@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="com.ivory.ivory.beans.Patient" table="patients">
+   <class name="com.ivory.ivory.models.Patient" table="patients">
       <meta attribute="class-description">
          This class contains the patient detail. 
       </meta>

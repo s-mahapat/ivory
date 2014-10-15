@@ -14,9 +14,9 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
-import com.ivory.ivory.beans.Patient;
-import com.ivory.ivory.beans.MedicalHistory;
-import com.ivory.ivory.beans.TreatmentPlan;
+import com.ivory.ivory.models.MedicalHistory;
+import com.ivory.ivory.models.Patient;
+import com.ivory.ivory.models.TreatmentPlan;
 
 /**
  * @author smahapat

@@ -12,14 +12,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
 <script src="//code.angularjs.org/1.2.21/angular-route.js"></script>
 <script src="//code.angularjs.org/1.2.21/angular-resource.js"></script>
-<script src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<!-- <script src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>--> 
 <script src="//cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/resources/datatables/angular-datatables.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/datatables/datatables.bootstrap.min.css" />
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/abn-tree/abn_tree_directive.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/abn-tree/abn_tree.css">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ivory.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/services.js"></script>

@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.ivory.ivory.beans.TreatmentPlan" table="treatment_plans">
+	<class name="com.ivory.ivory.models.TreatmentPlan" table="treatment_plans">
 		<meta attribute="class-description">
 			This class contains the treatment plans for a patient.
 		</meta>
@@ -14,6 +14,6 @@
 		<property name="name" column="name" type="string" />
 		<property name="date" column="date" type="date" />
 		<many-to-one name="patient" column="patient_id"
-			not-null="true" class="com.ivory.ivory.beans.Patient" />
+			not-null="true" class="com.ivory.ivory.models.Patient" />
 	</class>
 </hibernate-mapping>

@@ -2,6 +2,14 @@
  * 
  */
 
+/* class having the lower pane view ids */
+var LOWER_PANE_VIEWS = {
+	NOTHING : 0,
+	TREATMENT_DETAILS : 1,
+	NEW_TREATMENT_PLAN : 2,
+	NEW_TREATMENT_DETAIL: 3
+};
+
 /* Patient controllers */
 var patientControllers = angular.module('patientControllers', []);
 
@@ -63,8 +71,7 @@ patientControllers.controller('EditPatientController', [
 
 		} ]);
 
-patientControllers
-		.controller(
+patientControllers.controller(
 				'PatientDetailsController',
 				[
 						'$scope',
@@ -183,10 +190,3 @@ patientControllers
 							};
 						} ]);
 
-/* class having the lower pane view ids */
-var LOWER_PANE_VIEWS = {
-	NOTHING : 0,
-	TREATMENT_DETAILS : 1,
-	NEW_TREATMENT_PLAN : 2,
-	NEW_TREATMENT_DETAIL: 3
-};

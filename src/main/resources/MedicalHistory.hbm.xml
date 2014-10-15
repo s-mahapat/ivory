@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.ivory.ivory.beans.MedicalHistory" table="patient_medical_history">
+	<class name="com.ivory.ivory.models.MedicalHistory" table="patient_medical_history">
 		<meta attribute="class-description">
 			This class contains the answers to medical
 			history questions for each

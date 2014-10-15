@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ivory.ivory.beans;
+package com.ivory.ivory.models;
 
 /**
  * @author smahapat

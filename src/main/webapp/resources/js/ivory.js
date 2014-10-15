@@ -1,5 +1,5 @@
 var ivoryApp = angular.module('ivory', [ 'ngRoute', 'ngResource', 'datatables',
-		'patientControllers', 'doctorControllers', 'ivory.services', 'searchControllers' ]);
+                                 		'patientControllers', 'ivory.services', 'searchControllers' ]);
 
 ivoryApp.config(function($routeProvider, $locationProvider) {
 	$routeProvider.when('/registration/patient', {

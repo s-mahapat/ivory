@@ -1,18 +1,34 @@
-describe('Testing Patient Controller', function() {
+describe('Testing NewPatientController Controller', function() {
+	var scope=0, location=null, PatientResource=null;		
 
-describe('Patient Search Controller', function() {
-  var $scope;
-
-  beforeEach(module('ivory'));
-
-  beforeEach(inject(function($rootScope, $controller) {
-    $scope = $rootScope.$new();
-    $controller('PatientController', {$scope: $scope});
-  }));
-
-  it('patient id is greater than 0', function() {
-    expect($scope.patientid).toBeGreaterThan(0);
-  });
-
+	beforeEach(module('patientControllers', function($provide) {
+		PatientResource = jasmine.createSpyObj("PatientResource", ["save"]);
+		/*PatientResource.save.andReturn({
+			name: 'test'
+		});*/
+		$provide.value('PatientResource', PatientResource);
+	}));
+	
+	beforeEach(inject(function($rootScope, $location, $controller, _PatientResource_){
+		scope = $rootScope.$new();
+		location = $location;
+		PatientResource = _PatientResource_;
+		$controller("NewPatientController", { $scope: scope, $location: location, PatientResource: PatientResource});
+	}));
+	
+	it('Checking submitForm() calls service save() method', function(){
+		//console.log(Object.getOwnPropertyNames(scope));
+		scope.submitForm();
+		expect(PatientResource.save).toHaveBeenCalled();				
+	});
+	
+	it('Checking submitForm() is defined', function(){
+		expect(scope.submitForm).toBeDefined();
+	});
+	
 });
+
+
+describe('Testing NewPatientController Controller', function() {
+	
 });

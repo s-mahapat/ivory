@@ -15,12 +15,11 @@ var patientControllers = angular.module('patientControllers', []);
 
 patientControllers.controller('NewPatientController', [
 		'$scope',
-		'$http',
 		'$location',
 		'PatientResource',
-		function($scope, $http, $location, patientRes) {
+		function($scope, $location, PatientResource) {
 			$scope.submitForm = function() {
-				patientRes.save(null, $scope.patient, function(value,
+				PatientResource.save(null, $scope.patient, function(value,
 						responseHeaders) {
 					// success callback
 					$location.url("patient/details/" + value.id);

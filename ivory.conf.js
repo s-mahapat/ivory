@@ -16,12 +16,15 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js',
+      'https://code.angularjs.org/1.2.21/angular-route.js',
+      'https://code.angularjs.org/1.2.21/angular-resource.js',
       'https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js',
-      'src/main/webapp/resources/js/*.js',
+      'src/main/webapp/resources/js/lib/angular-mocks.js',
+      'src/main/webapp/resources/datatables/angular-datatables.min.js',
       'src/main/webapp/resources/js/controllers/*.js',
       'src/main/webapp/resources/js/ivory.js',
-      'src/main/webapp/resources/js/**/*.js',
-      'src/test/js/**/*.js'
+      'src/main/webapp/resources/js/services.js',
+      'src/test/js/**/*.js',
     ],
 
 
@@ -39,7 +42,12 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'spec', 'html'],
+    
+    
+    htmlReporter: {
+    	outputFile: 'tests/unit_tests.html',
+    },
 
 
     // web server port
@@ -61,7 +69,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode

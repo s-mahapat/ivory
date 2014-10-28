@@ -2,7 +2,7 @@ describe('Testing NewPatientController Controller', function() {
 	var scope=0, location=null, PatientResource=null;		
 
 	beforeEach(module('patientControllers', function($provide) {
-		PatientResource = jasmine.createSpyObj("PatientResource", ["save"]);
+		PatientResource = jasmine.createSpyObj("PatientResource", ["save"]);		
 		/*PatientResource.save.andReturn({
 			name: 'test'
 		});*/
@@ -18,17 +18,21 @@ describe('Testing NewPatientController Controller', function() {
 	
 	it('Checking submitForm() calls service save() method', function(){
 		//console.log(Object.getOwnPropertyNames(scope));
+		PatientResource.save = function(nullval, data, success, failure){
+			var value = {
+					id: 1,
+			};
+			success(value);
+		};
 		scope.submitForm();
-		expect(PatientResource.save).toHaveBeenCalled();				
+		//expect the url to have patient/details/id
+		expect(location.path()).toContain("patient/details/1");
 	});
 	
-	it('Checking submitForm() is defined', function(){
-		expect(scope.submitForm).toBeDefined();
-	});
 	
 });
 
 
-describe('Testing NewPatientController Controller', function() {
+describe('Testing EditPatientController Controller', function() {
 	
 });

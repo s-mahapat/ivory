@@ -9,7 +9,6 @@ ivoryServices.factory('PatientResource', [ '$resource', function($resource) {
 		'update' : {
 			method : 'PUT',
 		},
-
 	});
 	return Patient;
 } ]);

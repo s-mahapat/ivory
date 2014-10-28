@@ -25,8 +25,6 @@ patientControllers.controller('NewPatientController', [
 					$location.url("patient/details/" + value.id);
 				}, function(httpResponse) {
 					// error callback
-					showErrorMessage('Failed to create patient. '
-							+ httpResponse.statusText);
 				});
 			};
 
@@ -48,6 +46,7 @@ patientControllers.controller('EditPatientController', [
 			}, function(value, responseHeaders) {
 				// success callback
 				$scope.patient = patient;
+				$scope.patient.dob = new Date($scope.patient.dob);
 			}, function(httpResponse) {
 				// error callback
 				showErrorMessage('Failed to update patient. '
@@ -70,16 +69,35 @@ patientControllers.controller('EditPatientController', [
 
 		} ]);
 
+
+
 patientControllers.controller(
-				'PatientDetailsController',
+		'PatientDetailsController',
+		['$scope', '$routeParams', 'PatientResource',
+		function($scope, $routeParams, $patient){
+			$scope.patientid = $routeParams.id;
+			patient = $patient.get({
+			id : $scope.patientid
+			}, function(value, responseHeaders) {
+				// success callback
+				$scope.patient = patient;
+				
+			}, function(httpResponse) {
+				showErrorMessage('Failed to get patient. '
+						+ httpResponse.statusText);
+			});
+		}]);
+
+
+patientControllers.controller(
+				'PatientTreatmentController',
 				[
 						'$scope',
-						'$http',
 						'$routeParams',
 						'PatientResource',
 						'$filter',
 						'TreatmentPlan',
-						function($scope, $http, $routeParams, patientRes,
+						function($scope, $routeParams, patientRes,
 								$filter, treatmentPlan) {
 							$scope.patientid = $routeParams.id;
 							$scope.patient = {};
@@ -87,32 +105,32 @@ patientControllers.controller(
 							$scope.treatmentplan = {};
 							$scope.selected_detail = {};
 							$scope.lower_pane_view = 0;
-							patient = patientRes.get({
-								id : $scope.patientid
-							}, function(value, responseHeaders) {
-								// success callback
-								$scope.patient = patient;
-								$http({method: 'GET', url: 'resources/dummy_data/treatment_plans.json'}).
-								  success(function(data, status, headers, config) {
+							$scope.page = 1;
+									
+							$scope.getTreatments = function(pagenum){
+								$scope.patient.treatmentplans = treatmentPlan.query({page: pagenum,
+									patientid: $scope.patientid},
+								  function(data, status, headers, config) {
 								    // this callback will be called asynchronously
 								    // when the response is available
+									// return data;
 									  $scope.patient.treatmentplans = data;
-								  }).
-								  error(function(data, status, headers, config) {
+								  },
+								  function(data, status, headers, config) {
 								    // called asynchronously if an error occurs
 								    // or server returns response with an error status.
 								  });
-								 
-							}, function(httpResponse) {
-								showErrorMessage('Failed to get patient. '
-										+ httpResponse.statusText);
-							});
+							};
+							
+							$scope.getTreatments($scope.page);
+							
 							$scope.initCollapse = function() {
 								$scope.dataCollapseFlags = [];
 								for (var i = 0; i < $scope.patient.treatmentplans.length; i++) {
 									$scope.dataCollapseFlags.push(false);
 								}
 							};
+							
 							$scope.selectRow = function(index) {
 								$scope.detailCollapseFlags = [];
 								// always hide the lower pane and then reopen
@@ -136,12 +154,15 @@ patientControllers.controller(
 								}
 
 							};
+							
 							$scope.setDetailView = function(id) {
 								$scope.lower_pane_view = id;
 							};
+							
 							$scope.resetDetailView = function() {
 								$scope.lower_pane_view = LOWER_PANE_VIEWS.NOTHING;
 							};
+							
 							$scope.showDetail = function(treatment_plan_index,
 									detail_index) {
 								$scope.setDetailView(LOWER_PANE_VIEWS.TREATMENT_DETAILS);
@@ -155,6 +176,32 @@ patientControllers.controller(
 								// highlighted on the view
 								$scope.detailCollapseFlags[detail_index] = true;
 							};
+							
+							$scope.addNewTreatmentPlan = function() {
+								// set to todays date for the new treatment plan being created
+								$scope.treatmentplan.date = new Date();
+								$scope.setDetailView(LOWER_PANE_VIEWS.NEW_TREATMENT_PLAN);
+							};
+							
+							$scope.saveNewTreatmentPlan = function(){
+								// change the date format from UI format to DB format
+								treatmentPlan.save({
+									patientid : $scope.patientid
+								}, $scope.treatmentplan, function(value,
+										responseHeaders) {
+									// success callback
+									$scope.getTreatments($scope.page);
+								}, function(httpResponse) {
+									// error callback
+									showErrorMessage('Failed to create patient treatment plan. '
+											+ httpResponse.statusText);
+								});
+							};
+							
+							$scope.addNewTreatmentDetail = function(){
+								$scope.setDetailView(LOWER_PANE_VIEWS.NEW_TREATMENT_DETAIL);
+							};
+							
 							$scope.addNew = function(){
 								if($scope.selected_treatment_plan_id == 0){
 									$scope.addNewTreatmentPlan();
@@ -162,30 +209,13 @@ patientControllers.controller(
 									$scope.addNewTreatmentDetail();
 								}
 							};
-							$scope.addNewTreatmentPlan = function() {
-								// set to todays date for the new treatment plan being created
-								$scope.treatmentplan.date = $filter('date')
-										(new Date(), Config.DATE_FORMAT);
-								$scope.setDetailView(LOWER_PANE_VIEWS.NEW_TREATMENT_PLAN);
+							
+							$scope.showPage = function(pagenum){
+								if(pagenum < 1)
+									return;
+								$scope.page = pagenum;
+								alert($scope.page);
 							};
-							$scope.saveNewTreatmentPlan = function(){
-								// change the date format from UI format to DB format
-								var modified_treatmentplan = angular.copy($scope.treatmentplan);
-								modified_treatmentplan.date = getDateForDB($scope.treatmentplan.date);
-								treatmentPlan.save({
-									patientid : $scope.patientid
-								}, modified_treatmentplan, function(value,
-										responseHeaders) {
-									// success callback
-									//$location.url("patient/details/" + value.id);
-								}, function(httpResponse) {
-									// error callback
-									showErrorMessage('Failed to create patient treatment plan. '
-											+ httpResponse.statusText);
-								});
-							};
-							$scope.addNewTreatmentDetail = function(){
-								$scope.setDetailView(LOWER_PANE_VIEWS.NEW_TREATMENT_DETAIL);
-							};
+
 						} ]);
 

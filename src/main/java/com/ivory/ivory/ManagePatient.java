@@ -3,9 +3,9 @@
  */
 package com.ivory.ivory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -224,5 +224,28 @@ public class ManagePatient {
 			session.close();
 		}
 		return tp;
+	}
+	
+	//@SuppressWarnings("unchecked")
+	public List<TreatmentPlan> getTreatmentPlans(int id){
+		Session session = Hbutil.getSessionFactory().openSession();
+		Transaction tx = null;
+		List<TreatmentPlan> tps = new ArrayList<TreatmentPlan>();
+		try {
+			tx = session.beginTransaction();
+			Patient patient = (Patient) session.get(Patient.class, id);
+			tps = patient.getTreatmentPlans();
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		return tps;
 	}
 }

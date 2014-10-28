@@ -1,7 +1,6 @@
 package com.ivory.ivory.rest;
 
 import java.util.List;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,5 +63,11 @@ public class PatientRestController {
 	public TreatmentPlan SaveTreatmentPlan(@PathVariable int patientid, @RequestBody TreatmentPlan treatmentPlan){
 		ManagePatient mp = new ManagePatient();
 		return mp.saveTreatmentPlan(patientid, treatmentPlan);
+	}
+	
+	@RequestMapping(value="{patientid}/treatment/plan", method = RequestMethod.GET)
+	public List<TreatmentPlan> GetTreatmentPlans(@PathVariable int patientid){
+		ManagePatient mp = new ManagePatient();
+		return mp.getTreatmentPlans(patientid);
 	}
 }

@@ -15,8 +15,8 @@ public class TreatmentDetails implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private long id;
-	@ManyToOne(fetch = FetchType.LAZY)
-	private TreatmentPlan tp;
+	//@ManyToOne(fetch = FetchType.LAZY)
+	//private TreatmentPlan tp;
 
 	public TreatmentDetails() {
 		super();
@@ -32,12 +32,12 @@ public class TreatmentDetails implements Serializable {
 		this.id = id;
 	}
 	
-	public TreatmentPlan getTreatmentplan(){
+	/*public TreatmentPlan getTreatmentplan(){
 		return this.tp;
 	}
 	
 	public void setTreatmentplan(TreatmentPlan tp){
 		this.tp = tp;
-	}
+	}*/
    
 }

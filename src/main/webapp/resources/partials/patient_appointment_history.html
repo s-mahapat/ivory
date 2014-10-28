@@ -6,7 +6,6 @@
 			<thead>
 				<tr>
 					<th>&nbsp;</th>
-					<th>Sl No.</th>
 					<th>Start Date</th>
 					<th>Name</th>
 					<th>Amount</th>
@@ -19,12 +18,11 @@
 					class="ivory-expandable-row"
 					ng-class="{rowselected: dataCollapseFlags[$index]}">
 					<td><span class="glyphicon glyphicon-plus ivory-theme-color"></span></td>
-					<td>{{$index + 1}}</td>
 					<td>{{treatment_plan.date}}</td>
 					<td>{{treatment_plan.name}}</td>
-					<td>{{dataCollapseFlags[$index]}}</td>
-					<td>{{plan_index}}</td>
-					<td>0</td>
+					<td>{{treatment_plan.amount}}</td>
+					<td>{{treatment_plan.paid}}</td>
+					<td>{{treatment_plan.balance}}</td>
 				</tr>
 				<tr ng-switch on="dataCollapseFlags[$index]">
 					<td colspan="8" ng-switch-when="true">
@@ -74,13 +72,8 @@
 		</div>
 		<div class="pull-right">
 			<ul class="pagination footer-pagination">
-				<li><a href="">&laquo;</a></li>
-				<li><a href="">1</a></li>
-				<li><a href="">2</a></li>
-				<li><a href="">3</a></li>
-				<li><a href="">4</a></li>
-				<li><a href="">5</a></li>
-				<li><a href="">&raquo;</a></li>
+				<li><a href ng-click="showPage(page - 1)">&laquo;</a></li>
+				<li><a href="" ng-click="showPage(page + 1)">&raquo;</a></li>
 			</ul>
 		</div>
 	</div>
@@ -122,9 +115,9 @@
 				<div class="col-lg-6">
 					<div class="form-group">
 						<label for="start-date" class="control-label col-lg-3">Start Date</label>
-						<div class="col-lg-5">
+						<div class="col-lg-6">
 						<input type="date" class="form-control input-sm" id="start-date"
-							placeholder="Start Date" disabled="disabled" ng-model="treatmentplan.date">
+							placeholder="Start Date" ng-model="treatmentplan.date">
 						</div>
 					</div>
 				</div>

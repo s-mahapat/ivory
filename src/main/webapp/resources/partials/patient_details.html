@@ -13,7 +13,7 @@
 	<div class="col-lg-8" ng-if="details.view == 1">
 		<div class="panel panel-primary">Dashboard</div>
 	</div>
-	<div class="col-lg-8" ng-if="details.view == 2">
+	<div class="col-lg-8" ng-if="details.view == 2" ng-controller="PatientTreatmentController">
 		<ng-include src="'resources/partials/patient_appointment_history.html'"></ng-include>
 	</div>
 	<!-- <div class="col-lg-8" ng-switch on="details.view">
@@ -37,14 +37,15 @@
 				<address>
 					<strong>{{patient.fname}}&nbsp;{{patient.lname}}</strong><br> <br>
 					{{patient.address}}<br> Gender: {{patient.gender}}<br> <strong>Mobile: </strong>{{patient.mobile}}<br>
-					<strong>Phone: </strong>{{patient.phone}}<br> 
+					<strong>Phone: </strong>{{patient.phone}}<br>
+					<strong>DOB: </strong>{{patient.dob}}<br>
 					<a href="mailto:{{patient.email}}"><span class="ivory-email-link">{{patient.email}}</span></a><br>
 				</address>
 			</div>
 		</div>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<span class="panel-title"></span> <a href="#" class="edit-link"
+				<span class="">Shortcuts</span> <a href="#" class="edit-link"
 					title="Edit"><i class="glyphicon glyphicon-pencil pull-right"></i></a>
 			</div>
 			<div class="panel-body" id=""></div>

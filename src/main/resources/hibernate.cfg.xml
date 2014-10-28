@@ -11,7 +11,6 @@
       com.mysql.jdbc.Driver
    </property>
 
-   <!-- Assume test is the database name -->
    <property name="hibernate.connection.url">
       jdbc:mysql://localhost/ivory
    </property>
@@ -22,12 +21,15 @@
       root
    </property>
    <property name="hibernate.hbm2ddl.auto">update</property>
+   
+   <mapping class="com.ivory.ivory.models.Patient"></mapping>
+   <mapping class="com.ivory.ivory.models.TreatmentPlan"></mapping>
+   <mapping class="com.ivory.ivory.models.TreatmentDetails"></mapping>
 
-   <!-- List of XML mapping files -->
+   <!-- List of XML mapping files
    <mapping resource="Patient.hbm.xml"/>
-   <mapping resource="treatmentplan.hbm.xml"/>
-   <mapping resource="MedicalHistoryQuestion.hbm.xml"/>
-   <mapping resource="MedicalHistory.hbm.xml"/>
+   <mapping resource="treatmentplan.hbm.xml"/> -->
+
 
 </session-factory>
 </hibernate-configuration>

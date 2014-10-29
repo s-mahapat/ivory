@@ -14,7 +14,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
-import com.ivory.ivory.beans.Doctor;
+import com.ivory.ivory.models.Doctor;
 
 public class ManageDoctor {
 

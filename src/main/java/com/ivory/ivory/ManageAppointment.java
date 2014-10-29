@@ -14,8 +14,8 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import com.ivory.ivory.beans.Appointment;
-import com.ivory.ivory.beans.Patient;
+import com.ivory.ivory.models.Patient;
+import com.ivory.ivory.models.Appointment;
 
 public class ManageAppointment {
 

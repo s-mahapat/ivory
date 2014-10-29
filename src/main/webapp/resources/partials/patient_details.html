@@ -7,7 +7,7 @@
 			<a href="" ng-click="details.view = 1;dashboard = 1; appointments = 0; treatments = 0"
 				ng-model="dashboard" class="list-group-item" ng-class="{active: dashboard}">Dashboard</a>
 			<a href="" ng-click="details.view = 2; dashboard = 0; appointments = 1; treatments = 0"
-				ng-model="appointments" ng-value="2" class="list-group-item" ng-class="{active: appointments}">Treatments</a>
+				ng-model="appointments" ng-value="2" class="list-group-item" ng-class="{active: appointments}">Appointments</a>
 			<a href="" ng-click="details.view = 3; dashboard = 0; appointments = 0; treatments = 1"
 				ng-model="treatments" ng-value="3" class="list-group-item" ng-class="{active: treatments}">Treatments</a>
 		</div>
@@ -19,7 +19,7 @@
 		<ng-include src="'resources/partials/patient_appointment.html'"></ng-include>
 	</div>
 	<div class="col-lg-8" ng-if="details.view == 3">
-		<ng-include src="'resources/partials/patient_appointment_history.html'"></ng-include>
+		<ng-include src="'resources/partials/patient_treatment_history.html'"></ng-include>
 	</div>
 	<!-- <div class="col-lg-8" ng-switch on="details.view">
 		<div class="panel panel-primary" ng-switch-default>Dashboard</div>

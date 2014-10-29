@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ivory.ivory.beans.Appointment;
-import com.ivory.ivory.beans.Patient;
+import com.ivory.ivory.models.Patient;
+import com.ivory.ivory.models.Appointment;
 import com.ivory.ivory.ManageAppointment;
 import com.ivory.ivory.ManagePatient;
 

@@ -13,7 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
-import com.ivory.ivory.beans.Doctor;
+import com.ivory.ivory.models.Doctor;
 import com.ivory.ivory.ManageDoctor;
 
 @RestController

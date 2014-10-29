@@ -6,9 +6,25 @@ ivoryServices.factory('PatientResource', [ '$resource', function($resource) {
 		'update' : {
 			method : 'PUT',
 		},
-
 	});
 	return Patient;
+} ]);
+
+/*
+ * Resource used for all patient treatment plans
+ * 
+ */
+ivoryServices.factory('TreatmentPlan', [ '$resource', function($resource) {
+	var TreatmentPlan = $resource('rest/patient/:patientid/treatment/plan/:id', {
+		id : '@id',
+		patientid: '@patientid'
+	}, {
+		'update' : {
+			method : 'PUT',
+		},
+
+	});
+	return TreatmentPlan;
 } ]);
 
 ivoryServices.factory('DoctorResource', [ '$resource', function($resource) {

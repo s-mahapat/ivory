@@ -8,7 +8,8 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import com.ivory.ivory.beans.MedicalHistoryQuestion;
+
+import com.ivory.ivory.models.MedicalHistoryQuestion;
 
 /**
  * @author smahapat
@@ -22,7 +23,7 @@ public class ManageMedicalHistory {
 		Session session = Hbutil.getSessionFactory().openSession();
 		List<MedicalHistoryQuestion> questions = new ArrayList<MedicalHistoryQuestion>();
 		try {
-			questions = session.createQuery("FROM com.ivory.ivory.beans.MedicalHistoryQuestion").list();
+			questions = session.createQuery("FROM com.ivory.ivory.models.MedicalHistoryQuestion").list();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			throw (new HibernateException(e));

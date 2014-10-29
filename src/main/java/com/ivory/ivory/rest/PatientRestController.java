@@ -1,6 +1,7 @@
 package com.ivory.ivory.rest;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,14 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
-import com.google.gson.Gson;
-import com.ivory.ivory.beans.Patient;
 import com.ivory.ivory.ManageMedicalHistory;
 import com.ivory.ivory.ManagePatient;
-import com.ivory.ivory.beans.MedicalHistoryQuestion;
+import com.ivory.ivory.models.MedicalHistoryQuestion;
+import com.ivory.ivory.models.Patient;
+import com.ivory.ivory.models.TreatmentPlan;
 
 @RestController
 @RequestMapping("/rest/patient")
@@ -59,12 +58,19 @@ public class PatientRestController {
 	public @ResponseBody List<Patient> SearchPatients(@RequestParam("term") String term) {
 		ManagePatient mp = new ManagePatient();
 		List<Patient> patients = mp.searchPatient(term);
-		/*JSONObject obj = new JSONObject();
-		obj.put("draw", new Integer(draw));
-		obj.put("recordsTotal", new Integer(100));
-		obj.put("recordsFiltered", new Integer(patients.size()));
-		obj.put("data", patients);
-		return obj.toString();*/
 		return patients;
+	}
+	
+	@RequestMapping(value="{patientid}/treatment/plan", method = RequestMethod.POST)
+	public TreatmentPlan SaveTreatmentPlan(@PathVariable int patientid, @RequestBody TreatmentPlan treatmentPlan){
+		ManagePatient mp = new ManagePatient();
+		return mp.saveTreatmentPlan(patientid, treatmentPlan);
+	}
+	
+	@RequestMapping(value="{patientid}/treatment/plan", method = RequestMethod.GET)
+	public List<TreatmentPlan> GetTreatmentPlans(@PathVariable int patientid, @RequestParam(required = false) int page){
+		int size = 5;
+		ManagePatient mp = new ManagePatient();
+		return mp.getTreatmentPlans(patientid, page, size);
 	}
 }

@@ -1,39 +1,69 @@
 /**
  * 
  */
-package com.ivory.ivory.beans;
+package com.ivory.ivory.models;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.List;
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * @author smahapat
  * 
  */
-public class Patient {
+
+@Entity
+@Table(name="patients")
+public class Patient implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
 	private int id;
 	private String fname;
 	private String lname;
 	private String address;
 	private String email;
+	
+	@Column
+	@Temporal(TemporalType.DATE)
 	private Date dob;
 	private String gender;
 	private String phone;
 	private String mobile;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "patient")
+	@JsonIgnore(true)
+	private List<TreatmentPlan> treatmentPlans = new ArrayList<TreatmentPlan>();
 
 	public Patient() {
 	}
 
-	public Patient(String fname, String lname, String email, String address, String dob, String gender, String phone, String mobile) {
+	public Patient(String fname, String lname, String email, String address, Date dob, String gender, String phone, String mobile) {
 		this.fname = fname;
 		this.lname = lname;
 		this.email = email;
 		this.address = address;
-		this.dob = stringToDate(dob);
+		this.dob = dob;
 		this.gender = gender;
 		this.phone = phone;
 		this.mobile = mobile;
@@ -111,14 +141,17 @@ public class Patient {
 		this.mobile = _mobile;
 	}
 	
-	private Date stringToDate(String date){
-		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		Date dobDt = null;
-		try {
-			dobDt = formatter.parse(date);
-		} catch (ParseException e) {
-			dobDt = null;
-		}
-		return dobDt;
+	public List<TreatmentPlan> getTreatmentPlans(){
+		return this.treatmentPlans;
 	}
+	
+	public void setTreatmentPlans(List<TreatmentPlan> tps){
+		this.treatmentPlans = tps;
+	}
+	
+	public void addTreatmentPlan(TreatmentPlan tp){
+		tp.setPatient(this);
+		this.treatmentPlans.add(tp);
+	}
+	
 }

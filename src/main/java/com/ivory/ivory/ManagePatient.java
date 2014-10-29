@@ -3,8 +3,14 @@
  */
 package com.ivory.ivory;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -14,8 +20,9 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
-import com.ivory.ivory.beans.Patient;
-import com.ivory.ivory.beans.MedicalHistory;
+import com.ivory.ivory.models.MedicalHistory;
+import com.ivory.ivory.models.Patient;
+import com.ivory.ivory.models.TreatmentPlan;
 
 /**
  * @author smahapat
@@ -73,7 +80,7 @@ public class ManagePatient {
 
 	/* Method to CREATE an patient in the database */
 	public Integer addPatient(String fname, String lname, String email,
-			String address, String dob, String gender, String phone,
+			String address, Date dob, String gender, String phone,
 			String mobile, Map<Integer, String> medicalHistory) {
 		Session session = Hbutil.getSessionFactory().openSession();
 		Transaction tx = null;
@@ -136,7 +143,7 @@ public class ManagePatient {
 			Criterion mobileCr = Restrictions.like("mobile", searchString,
 					MatchMode.EXACT);
 			Criterion emailCr = Restrictions.like("email", searchString,
-					MatchMode.EXACT);
+					MatchMode.ANYWHERE);
 			Criterion completeCr = Restrictions.disjunction().add(fnameCr)
 					.add(lnameCr).add(mobileCr).add(emailCr);
 			Criteria cr = session.createCriteria(Patient.class);
@@ -202,5 +209,53 @@ public class ManagePatient {
 			session.close();
 		}
 		return patient;
+	}
+	
+	public TreatmentPlan saveTreatmentPlan(int id, TreatmentPlan treatment_plan){
+		Session session = Hbutil.getSessionFactory().openSession();
+		Transaction tx = null;
+		TreatmentPlan tp = null;		
+		Patient patient = (Patient) session.get(Patient.class, id);
+		treatment_plan.setPatient(patient);
+		try {
+			tx = session.beginTransaction();
+			session.save(treatment_plan);
+			tx.commit();
+			tp = treatment_plan;
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return tp;
+	}
+	
+	//@SuppressWarnings("unchecked")
+	public List<TreatmentPlan> getTreatmentPlans(int id, int page, int size){
+		Session session = Hbutil.getSessionFactory().openSession();
+		Transaction tx = null;
+		List<TreatmentPlan> tp = new ArrayList<TreatmentPlan>();
+		int fromIndex = (page - 1) * size;
+		// toindex is excluded in sublist function
+		int toIndex = fromIndex + size;				
+		try {
+			tx = session.beginTransaction();
+			Patient patient = (Patient) session.get(Patient.class, id);
+			int listSize = patient.getTreatmentPlans().size();
+			toIndex =  listSize - 1 > toIndex ? toIndex : listSize - 1;
+			tp.addAll(patient.getTreatmentPlans().subList(fromIndex, toIndex));
+			tx.commit();
+		} catch (HibernateException e) {
+			
+			e.printStackTrace();
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		return tp;
 	}
 }

@@ -17,8 +17,13 @@
 			<form class="navbar-form navbar-right" ng-submit="submit()"
 				ng-controller="PatientSearchController" role="search" name="search">
 				<div class="form-group">
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/layouts/menu.jsp
 					<input type="text" class="form-control" ng-model="term"
 						placeholder="Search Doctor/Patient" name="q" id="searchbox" autocomplete="off">
+=======
+					<input type="text" class="form-control input-sm" ng-model="term"
+						placeholder="Search Patient" name="q" id="searchbox" autocomplete="off">
+>>>>>>> master:src/main/webapp/WEB-INF/views/menu.jsp
 				</div>
 			</form>
 		</div>

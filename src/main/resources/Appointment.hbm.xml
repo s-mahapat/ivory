@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="com.ivory.ivory.beans.Appointment" table="appointments">
+      <meta attribute="class-description">
+         This class contains the appointment detail. 
+      </meta>
+      <id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
+      <property name="patientid" column="patient_id" type="int"/>
+      <property name="appointmentdate" column="appointmentdate" type="date"/>
+      <!--<property name="appointmenttime" column="appointmenttime" type="time"/> -->
+      <property name="appointmentreason" column="appointmentreason" type="string"/>      
+      <property name="appointmentremarks" column="appointmentremarks" type="string"/>
+   </class>
+</hibernate-mapping>

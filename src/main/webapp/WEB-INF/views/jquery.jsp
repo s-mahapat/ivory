@@ -17,8 +17,14 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ivory.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/services.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/searchcontrollers.js"></script>
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/layouts/jquery.jsp
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/doctorControllers.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/appointmentControllers.js"></script>
+=======
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/patientcontrollers.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/errorcontrollers.js"></script>
+>>>>>>> master:src/main/webapp/WEB-INF/views/jquery.jsp
 
 <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>

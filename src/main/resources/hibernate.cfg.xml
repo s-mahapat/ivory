@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration SYSTEM 
+<!DOCTYPE hibernate-configuration SYSTEM
 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
@@ -21,15 +21,12 @@
       root
    </property>
    <property name="hibernate.hbm2ddl.auto">update</property>
-   
+
    <mapping class="com.ivory.ivory.models.Patient"></mapping>
    <mapping class="com.ivory.ivory.models.TreatmentPlan"></mapping>
    <mapping class="com.ivory.ivory.models.TreatmentDetails"></mapping>
-
-   <!-- List of XML mapping files
-   <mapping resource="Patient.hbm.xml"/>
-   <mapping resource="treatmentplan.hbm.xml"/> -->
-
+   <mapping class="com.ivory.ivory.models.Doctor"></mapping>
+   <mapping class="com.ivory.ivory.models.Appointment"></mapping>
 
 </session-factory>
 </hibernate-configuration>

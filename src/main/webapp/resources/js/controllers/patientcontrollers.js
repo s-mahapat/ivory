@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 
 /* class having the lower pane view ids */
@@ -81,7 +81,7 @@ patientControllers.controller(
 			}, function(value, responseHeaders) {
 				// success callback
 				$scope.patient = patient;
-				
+
 			}, function(httpResponse) {
 				showErrorMessage('Failed to get patient. '
 						+ httpResponse.statusText);
@@ -106,7 +106,7 @@ patientControllers.controller(
 							$scope.selected_detail = {};
 							$scope.lower_pane_view = 0;
 							$scope.page = 1;
-									
+
 							$scope.getTreatments = function(pagenum){
 								$scope.patient.treatmentplans = treatmentPlan.query({page: pagenum,
 									patientid: $scope.patientid},
@@ -121,16 +121,16 @@ patientControllers.controller(
 								    // or server returns response with an error status.
 								  });
 							};
-							
+
 							$scope.getTreatments($scope.page);
-							
+
 							$scope.initCollapse = function() {
 								$scope.dataCollapseFlags = [];
 								for (var i = 0; i < $scope.patient.treatmentplans.length; i++) {
 									$scope.dataCollapseFlags.push(false);
 								}
 							};
-							
+
 							$scope.selectRow = function(index) {
 								$scope.detailCollapseFlags = [];
 								// always hide the lower pane and then reopen
@@ -154,15 +154,15 @@ patientControllers.controller(
 								}
 
 							};
-							
+
 							$scope.setDetailView = function(id) {
 								$scope.lower_pane_view = id;
 							};
-							
+
 							$scope.resetDetailView = function() {
 								$scope.lower_pane_view = LOWER_PANE_VIEWS.NOTHING;
 							};
-							
+
 							$scope.showDetail = function(treatment_plan_index,
 									detail_index) {
 								$scope.setDetailView(LOWER_PANE_VIEWS.TREATMENT_DETAILS);
@@ -176,13 +176,13 @@ patientControllers.controller(
 								// highlighted on the view
 								$scope.detailCollapseFlags[detail_index] = true;
 							};
-							
+
 							$scope.addNewTreatmentPlan = function() {
 								// set to todays date for the new treatment plan being created
 								$scope.treatmentplan.date = new Date();
 								$scope.setDetailView(LOWER_PANE_VIEWS.NEW_TREATMENT_PLAN);
 							};
-							
+
 							$scope.saveNewTreatmentPlan = function(){
 								// change the date format from UI format to DB format
 								treatmentPlan.save({
@@ -197,11 +197,11 @@ patientControllers.controller(
 											+ httpResponse.statusText);
 								});
 							};
-							
+
 							$scope.addNewTreatmentDetail = function(){
 								$scope.setDetailView(LOWER_PANE_VIEWS.NEW_TREATMENT_DETAIL);
 							};
-							
+
 							$scope.addNew = function(){
 								if($scope.selected_treatment_plan_id == 0){
 									$scope.addNewTreatmentPlan();
@@ -209,7 +209,7 @@ patientControllers.controller(
 									$scope.addNewTreatmentDetail();
 								}
 							};
-							
+
 							$scope.showPage = function(pagenum){
 								if(pagenum < 1)
 									return;
@@ -219,3 +219,35 @@ patientControllers.controller(
 
 						} ]);
 
+
+patientControllers.controller('NewAppointmentController', [
+		'$scope',
+		'$routeParams',
+		'$location',
+		'AppointmentResource',
+		function($scope, $routeParams, $location, appointmentRes) {
+			$scope.appointments = {};
+			$scope.appointments = appointmentRes.query({
+				id : $routeParams.id
+			});
+			$scope.submitForm = function() {
+				$scope.appointment.patientid = $routeParams.id;
+				alert($scope.appointment);
+				appointmentRes.save(null, $scope.appointment, function(value,
+						responseHeaders) {
+					// success callback
+					alert(appointmentRes);
+					$location.url("patient/details/"
+							+ $scope.appointment.patientid);
+					$scope.appointments = {};
+					$scope.appointments = appointmentRes.query({
+						id : $routeParams.id
+					});
+					$scope.appointment = {};
+				}, function(httpResponse) {
+					// error callback
+					showErrorMessage('Failed to create appointment. '
+							+ httpResponse.statusText);
+				});
+			};
+		} ]);

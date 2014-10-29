@@ -16,7 +16,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/services.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/searchcontrollers.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/doctorControllers.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/appointmentControllers.js"></
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/appointmentControllers.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/patientcontrollers.js"></script>
 
 <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->

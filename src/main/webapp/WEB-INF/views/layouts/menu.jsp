@@ -18,7 +18,7 @@
 				ng-controller="PatientSearchController" role="search" name="search">
 				<div class="form-group">
 					<input type="text" class="form-control" ng-model="term"
-						placeholder="Search Patient" name="q" id="searchbox" autocomplete="off">
+						placeholder="Search Doctor/Patient" name="q" id="searchbox" autocomplete="off">
 				</div>
 			</form>
 		</div>

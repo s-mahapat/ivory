@@ -26,6 +26,8 @@
    <mapping resource="Patient.hbm.xml"/>
    <mapping resource="MedicalHistoryQuestion.hbm.xml"/>
    <mapping resource="MedicalHistory.hbm.xml"/>
+   <mapping resource="Doctor.hbm.xml"/>
+   <mapping resource="Appointment.hbm.xml"/>
 
 </session-factory>
 </hibernate-configuration>

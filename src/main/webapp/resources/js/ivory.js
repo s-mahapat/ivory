@@ -1,5 +1,6 @@
 var ivoryApp = angular.module('ivory', [ 'ngRoute', 'ngResource', 'datatables',
-		'patientControllers', 'doctorControllers', 'ivory.services', 'searchControllers' ]);
+		'patientControllers', 'doctorControllers', 'ivory.services',
+		'searchControllers' ]);
 
 ivoryApp.config(function($routeProvider, $locationProvider) {
 	$routeProvider.when('/registration/patient', {
@@ -14,7 +15,7 @@ ivoryApp.config(function($routeProvider, $locationProvider) {
 	}).when('/patient/edit/:id', {
 		templateUrl : 'resources/partials/patient_registration.html',
 		controller : 'EditPatientController'
-	}).when('/patient/search/:term',{
+	}).when('/patient/search/:term', {
 		templateUrl : 'resources/partials/search_results.html',
 		controller : 'PatientSearchResultsController'
 	});

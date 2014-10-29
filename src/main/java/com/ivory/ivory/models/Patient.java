@@ -51,7 +51,7 @@ public class Patient implements Serializable{
 	private String phone;
 	private String mobile;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "patient")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "patient")
 	@JsonIgnore(true)
 	private List<TreatmentPlan> treatmentPlans = new ArrayList<TreatmentPlan>();
 

@@ -1,6 +1,8 @@
 package com.ivory.ivory.rest;
 
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,8 +68,9 @@ public class PatientRestController {
 	}
 	
 	@RequestMapping(value="{patientid}/treatment/plan", method = RequestMethod.GET)
-	public List<TreatmentPlan> GetTreatmentPlans(@PathVariable int patientid){
+	public List<TreatmentPlan> GetTreatmentPlans(@PathVariable int patientid, @RequestParam(required = false) int page){
+		int size = 5;
 		ManagePatient mp = new ManagePatient();
-		return mp.getTreatmentPlans(patientid);
+		return mp.getTreatmentPlans(patientid, page, size);
 	}
 }

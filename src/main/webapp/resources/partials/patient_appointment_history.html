@@ -18,7 +18,7 @@
 					class="ivory-expandable-row"
 					ng-class="{rowselected: dataCollapseFlags[$index]}">
 					<td><span class="glyphicon glyphicon-plus ivory-theme-color"></span></td>
-					<td>{{treatment_plan.date}}</td>
+					<td>{{treatment_plan.date | date: 'longDate'}}</td>
 					<td>{{treatment_plan.name}}</td>
 					<td>{{treatment_plan.amount}}</td>
 					<td>{{treatment_plan.paid}}</td>
@@ -70,7 +70,7 @@
 				<span class="glyphicon glyphicon-minus-sign ivory-theme-color"></span>
 			</button>
 		</div>
-		<div class="pull-right">
+		<div class="pull-right">			
 			<ul class="pagination footer-pagination">
 				<li><a href ng-click="showPage(page - 1)">&laquo;</a></li>
 				<li><a href="" ng-click="showPage(page + 1)">&raquo;</a></li>

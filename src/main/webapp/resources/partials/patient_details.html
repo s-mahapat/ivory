@@ -38,7 +38,7 @@
 					<strong>{{patient.fname}}&nbsp;{{patient.lname}}</strong><br> <br>
 					{{patient.address}}<br> Gender: {{patient.gender}}<br> <strong>Mobile: </strong>{{patient.mobile}}<br>
 					<strong>Phone: </strong>{{patient.phone}}<br>
-					<strong>DOB: </strong>{{patient.dob}}<br>
+					<strong>DOB: </strong>{{patient.dob | date: 'longDate'}}<br>
 					<a href="mailto:{{patient.email}}"><span class="ivory-email-link">{{patient.email}}</span></a><br>
 				</address>
 			</div>

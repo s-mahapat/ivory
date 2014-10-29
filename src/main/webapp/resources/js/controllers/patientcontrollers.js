@@ -214,7 +214,7 @@ patientControllers.controller(
 								if(pagenum < 1)
 									return;
 								$scope.page = pagenum;
-								alert($scope.page);
+								$scope.getTreatments($scope.page);
 							};
 
 						} ]);

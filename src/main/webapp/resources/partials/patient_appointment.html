@@ -1,19 +1,21 @@
 <form class="form-horizontal" name="appointmentform"
-	id="appointmentform" ng-controller="NewAppointmentController"
+	id="appointmentform"
 	ng-submit="submitForm()">
 	<div class="col-lg-6">
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="appointmentdate">Appointment
 				Date</label>
 			<div class="col-lg-8">
-				<input class="form-control" type="date" placeholder="yyyy-MM-dd" name="appointmentdate"
+				<input class="form-control" type="datetime-local" placeholder="" name="appointmentdate"
 					id="appointmentdate" placeholder="Appointment Date"
 					ng-model="appointment.appointmentdate" required>
 			</div>
 		</div>
+		
+	</div>
+	<div class="col-lg-6">
 		<div class="form-group">
-			<label class="control-label col-lg-3" for="appointmentreason">Reason
-				of Visit</label>
+			<label class="control-label col-lg-3" for="appointmentreason">Reason</label>
 			<div class="col-lg-8">
 				<textarea class="form-control" type="text" id="appointmentreason"
 					name="appointmentreason" placeholder="Reason for Appointment"
@@ -21,30 +23,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-6">
-		<div class="form-group">
-			<label class="control-label col-lg-3" for="appointmenttime">Appointment
-				Time</label>
-			<div class="col-lg-8">
-				<input class="form-control" type="time" id="appointmenttime"
-					name="appointmenttime" placeholder="Appointment Time"
-					ng-model="appointment.appointmenttime" required>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-lg-3" for="appointmentdate">Appointment
-				Remarks</label>
-			<div class="col-lg-8">
-				<textarea class="form-control" type="text" id="appointmentremarks"
-					name="appointmentremarks" placeholder="Appointment Remarks"
-					ng-model="appointment.appointmentremarks"></textarea>
-			</div>
-		</div>
-	</div>
 	<div class="form-group">
 		<div class="col-lg-offset-10 col-lg-2">
-			<button id="submit" type="submit" class="btn btn-primary btn-sm">Save</button>
-			<button type="reset" class="btn btn-primary btn-sm">Reset</button>
+			<button id="submit" type="submit" class="btn btn-primary btn-xs">Save</button>
+			<button type="reset" class="btn btn-primary btn-xs">Reset</button>
 		</div>
 	</div>
 

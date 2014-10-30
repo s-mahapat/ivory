@@ -35,10 +35,12 @@ public class Patient implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private int id;
+	
 	private String fname;
 	private String lname;
 	private String address;
@@ -54,6 +56,10 @@ public class Patient implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "patient")
 	@JsonIgnore(true)
 	private List<TreatmentPlan> treatmentPlans = new ArrayList<TreatmentPlan>();
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "patient")
+	@JsonIgnore(true)
+	private List<Appointment> appointments = new ArrayList<Appointment>();
 
 	public Patient() {
 	}
@@ -152,6 +158,19 @@ public class Patient implements Serializable{
 	public void addTreatmentPlan(TreatmentPlan tp){
 		tp.setPatient(this);
 		this.treatmentPlans.add(tp);
+	}
+	
+	public List<Appointment> getAppointments(){
+		return this.appointments;
+	}
+	
+	public void setAppointments(List<Appointment> appointments){
+		this.appointments = appointments;
+	}
+	
+	public void addAppointment(Appointment ap){
+		ap.setPatient(this);
+		this.appointments.add(ap);
 	}
 	
 }

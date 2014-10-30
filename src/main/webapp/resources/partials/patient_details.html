@@ -15,10 +15,10 @@
 	<div class="col-lg-8" ng-if="details.view == 1">
 		<div class="panel panel-primary">Dashboard</div>
 	</div>
-	<div class="col-lg-8" ng-if="details.view == 2" ng-controller="PatientTreatmentController">
+	<div class="col-lg-8" ng-if="details.view == 2" ng-controller="NewAppointmentController">
 		<ng-include src="'resources/partials/patient_appointment.html'"></ng-include>
 	</div>
-	<div class="col-lg-8" ng-if="details.view == 3">
+	<div class="col-lg-8" ng-if="details.view == 3" ng-controller="PatientTreatmentController">
 		<ng-include src="'resources/partials/patient_treatment_history.html'"></ng-include>
 	</div>
 	<!-- <div class="col-lg-8" ng-switch on="details.view">

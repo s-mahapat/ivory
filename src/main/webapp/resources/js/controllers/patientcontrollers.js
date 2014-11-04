@@ -225,26 +225,33 @@ patientControllers.controller('NewAppointmentController', [
 		'$routeParams',
 		'$location',
 		'AppointmentResource',
-		function($scope, $routeParams, $location, appointmentRes) {
+		function($scope, $routeParams, $location, $appointment) {
 			$scope.appointments = {};
-			$scope.appointments = appointmentRes.query({
-				id : $routeParams.id
-			});
+			$scope.appointment = new Object();
+									
+			$scope.getAppointments = function(id){
+				$scope.appointments = $appointment.query({
+					id : $routeParams.id
+				});
+			}
+			
+			$scope.getAppointments();
+			
 			$scope.submitForm = function() {
 				$scope.appointment.patientid = $routeParams.id;
-				alert($scope.appointment);
-				appointmentRes.save(null, $scope.appointment, function(value,
-						responseHeaders) {
-					// success callback
-					alert(appointmentRes);
-					$location.url("patient/details/"
-							+ $scope.appointment.patientid);
-					$scope.appointments = {};
-					$scope.appointments = appointmentRes.query({
-						id : $routeParams.id
-					});
-					$scope.appointment = {};
-				}, function(httpResponse) {
+				$appointment.save({
+						id : $scope.appointment.patientid
+					}, 
+					$scope.appointment, 
+					function(value, responseHeaders) {
+						// success callback
+						$location.url("patient/details/"
+								+ $scope.appointment.patientid);
+						$scope.appointments = {};
+						$scope.getAppointments();
+						$scope.appointment = {};
+					}, 
+					function(httpResponse) {
 					// error callback
 					showErrorMessage('Failed to create appointment. '
 							+ httpResponse.statusText);

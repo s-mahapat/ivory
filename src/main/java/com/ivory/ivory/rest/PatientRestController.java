@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ivory.ivory.ManageAppointment;
 import com.ivory.ivory.ManageMedicalHistory;
 import com.ivory.ivory.ManagePatient;
+import com.ivory.ivory.models.Appointment;
 import com.ivory.ivory.models.MedicalHistoryQuestion;
 import com.ivory.ivory.models.Patient;
 import com.ivory.ivory.models.TreatmentPlan;
@@ -72,5 +74,18 @@ public class PatientRestController {
 		int size = 5;
 		ManagePatient mp = new ManagePatient();
 		return mp.getTreatmentPlans(patientid, page, size);
+	}
+	
+	@RequestMapping(value="{patientid}/appointment", method = RequestMethod.POST)
+	public Appointment SaveAppointment(@PathVariable int patientid, @RequestBody Appointment appointment) {
+		ManageAppointment md = new ManageAppointment();
+		return md.addAppointment(patientid, appointment);
+	}
+
+	@RequestMapping(value = "{patientid}/appointment", method = RequestMethod.GET)
+	public @ResponseBody List<Appointment> GetAppointmentList(@PathVariable int patientid) {
+		ManageAppointment mp = new ManageAppointment();
+		List<Appointment> appointments = mp.getAppointmentList(patientid);
+		return appointments;
 	}
 }

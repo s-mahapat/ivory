@@ -40,7 +40,7 @@ ivoryServices.factory('DoctorResource', [ '$resource', function($resource) {
 } ]);
 
 ivoryServices.factory('AppointmentResource', [ '$resource', function($resource) {
-	var Appointment = $resource('rest/appointment/:id', {
+	var Appointment = $resource('rest/patient/:id/appointment', {
 		id : '@id'
 	}, {
 		'update' : {

@@ -17,9 +17,9 @@
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="appointmentreason">Reason</label>
 			<div class="col-lg-8">
-				<textarea class="form-control" type="text" id="appointmentreason"
+				<input class="form-control" type="text" id="appointmentreason"
 					name="appointmentreason" placeholder="Reason for Appointment"
-					ng-model="appointment.appointmentreason"></textarea>
+					ng-model="appointment.appointmentreason">
 			</div>
 		</div>
 	</div>
@@ -37,21 +37,14 @@
 			<table class="table table-condensed table-hover">
 				<thead>
 					<tr>
-						<th>&nbsp;</th>
-						<th>Sl No.</th>
 						<th>Appointment Date</th>
-						<th>Appointment Time</th>
-						<th>Reason of Visit</th>
-						<th>Remarks</th>
+						<th>Reason</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr dt-rows="" ng-repeat="appointment in appointments">
-						<td>{{ appointment.id }}</td>
-						<td>{{ appointment.appointmentdate }}</td>
-						<td>{{ appointment.appointmenttime }}</td>
+						<td>{{ appointment.appointmentdate | date: 'medium' }}</td>
 						<td>{{ appointment.appointmentreason }}</td>
-						<td>{{ appointment.appointmentremarks }}</td>
 					</tr>
 				</tbody>
 			</table>

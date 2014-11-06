@@ -2,7 +2,7 @@
 	<div class="panel-heading">Treatment History</div>
 	<div class="panel-body" id="appointments">
 		<!-- Table -->
-		<table class="table table-condensed table-hover">
+		<table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-condensed table-hover">
 			<thead>
 				<tr>
 					<th>&nbsp;</th>
@@ -14,7 +14,7 @@
 				</tr>
 			</thead>
 			<tbody ng-repeat="treatment_plan in patient.treatmentplans">
-				<tr ng-init="plan_index=$index" ng-click="selectRow($index)"
+				<tr dt-rows="" ng-init="plan_index=$index" ng-click="selectRow($index)"
 					class="ivory-expandable-row"
 					ng-class="{rowselected: dataCollapseFlags[$index]}">
 					<td><span class="glyphicon glyphicon-plus ivory-theme-color"></span></td>
@@ -70,12 +70,12 @@
 				<span class="glyphicon glyphicon-minus-sign ivory-theme-color"></span>
 			</button>
 		</div>
-		<div class="pull-right">			
+		<!--<div class="pull-right">			
 			<ul class="pagination footer-pagination">
 				<li><a href ng-click="showPage(page - 1)">&laquo;</a></li>
 				<li><a href="" ng-click="showPage(page + 1)">&raquo;</a></li>
 			</ul>
-		</div>
+		</div>  -->
 	</div>
 </div>
 

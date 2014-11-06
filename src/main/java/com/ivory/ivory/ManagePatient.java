@@ -5,13 +5,10 @@ package com.ivory.ivory;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
-import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -29,6 +26,8 @@ import com.ivory.ivory.models.TreatmentPlan;
  * 
  */
 public class ManagePatient {
+	
+	private static Logger log = Logger.getLogger(ManagePatient.class.getName());
 
 	public Patient addPatient(Patient patient) {
 		Session session = Hbutil.getSessionFactory().openSession();
@@ -42,8 +41,9 @@ public class ManagePatient {
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
-			e.printStackTrace();
+			log.fatal(e);
 		} finally {
+			session.flush();
 			session.close();
 		}
 		return newpatient;
@@ -71,8 +71,9 @@ public class ManagePatient {
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
-			e.printStackTrace();
+			log.fatal(e);
 		} finally {
+			session.flush();
 			session.close();
 		}
 		return updatedPatient;
@@ -113,8 +114,9 @@ public class ManagePatient {
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
-			e.printStackTrace();
+			log.fatal(e);
 		} finally {
+			session.flush();
 			session.close();
 		}
 		return patientID;
@@ -155,7 +157,7 @@ public class ManagePatient {
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
-			e.printStackTrace();
+			log.fatal(e);
 		} finally {
 			session.close();
 		}
@@ -175,7 +177,7 @@ public class ManagePatient {
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
-			e.printStackTrace();
+			log.fatal(e);
 		} finally {
 			session.close();
 		}
@@ -204,7 +206,7 @@ public class ManagePatient {
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
-			e.printStackTrace();
+			log.fatal(e);
 		} finally {
 			session.close();
 		}
@@ -221,11 +223,12 @@ public class ManagePatient {
 			tx = session.beginTransaction();
 			session.save(treatment_plan);
 			tx.commit();
+			session.flush();
 			tp = treatment_plan;
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
-			e.printStackTrace();
+			log.fatal(e);
 		} finally {
 			session.close();
 		}
@@ -233,25 +236,26 @@ public class ManagePatient {
 	}
 	
 	//@SuppressWarnings("unchecked")
-	public List<TreatmentPlan> getTreatmentPlans(int id, int page, int size){
+	public List<TreatmentPlan> getTreatmentPlans(int id){
 		Session session = Hbutil.getSessionFactory().openSession();
 		Transaction tx = null;
 		List<TreatmentPlan> tp = new ArrayList<TreatmentPlan>();
-		int fromIndex = (page - 1) * size;
+		//int fromIndex = (page - 1) * size;
 		// toindex is excluded in sublist function
-		int toIndex = fromIndex + size;				
-		try {
+		//int toIndex = fromIndex + size;				
+		try {			
 			tx = session.beginTransaction();
 			Patient patient = (Patient) session.get(Patient.class, id);
-			int listSize = patient.getTreatmentPlans().size();
-			toIndex =  listSize - 1 > toIndex ? toIndex : listSize - 1;
-			tp.addAll(patient.getTreatmentPlans().subList(fromIndex, toIndex));
+			//int listSize = patient.getTreatmentPlans().size();
+			//toIndex =  listSize - 1 > toIndex ? toIndex : listSize - 1;
+			//tp.addAll(patient.getTreatmentPlans().subList(fromIndex, toIndex));
+			tp.addAll(patient.getTreatmentPlans());
 			tx.commit();
 		} catch (HibernateException e) {
 			
 			e.printStackTrace();
 		}catch(NullPointerException e){
-			e.printStackTrace();
+			log.fatal(e);
 		}
 		finally {
 			session.close();

@@ -70,10 +70,10 @@ public class PatientRestController {
 	}
 	
 	@RequestMapping(value="{patientid}/treatment/plan", method = RequestMethod.GET)
-	public List<TreatmentPlan> GetTreatmentPlans(@PathVariable int patientid, @RequestParam(required = false) int page){
+	public List<TreatmentPlan> GetTreatmentPlans(@PathVariable int patientid){
 		int size = 5;
 		ManagePatient mp = new ManagePatient();
-		return mp.getTreatmentPlans(patientid, page, size);
+		return mp.getTreatmentPlans(patientid);
 	}
 	
 	@RequestMapping(value="{patientid}/appointment", method = RequestMethod.POST)

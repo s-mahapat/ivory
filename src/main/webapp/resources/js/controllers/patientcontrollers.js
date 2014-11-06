@@ -97,8 +97,11 @@ patientControllers.controller(
 						'PatientResource',
 						'$filter',
 						'TreatmentPlan',
+						'DTOptionsBuilder',
+						'DTColumnDefBuilder',
 						function($scope, $routeParams, patientRes,
-								$filter, treatmentPlan) {
+								$filter, treatmentPlan, DTOptionsBuilder, 
+								DTColumnDefBuilder) {
 							$scope.patientid = $routeParams.id;
 							$scope.patient = {};
 							$scope.selected_treatment_plan_id = 0;
@@ -108,8 +111,7 @@ patientControllers.controller(
 							$scope.page = 1;
 
 							$scope.getTreatments = function(pagenum){
-								$scope.patient.treatmentplans = treatmentPlan.query({page: pagenum,
-									patientid: $scope.patientid},
+								$scope.patient.treatmentplans = treatmentPlan.query({patientid: $scope.patientid},
 								  function(data, status, headers, config) {
 								    // this callback will be called asynchronously
 								    // when the response is available
@@ -123,6 +125,15 @@ patientControllers.controller(
 							};
 
 							$scope.getTreatments($scope.page);
+							
+							$scope.dtOptions = DTOptionsBuilder.newOptions()
+							.withPaginationType('full_numbers').withBootstrap()
+							.withDisplayLength(10);
+							
+							$scope.dtColumnDefs = [DTColumnDefBuilder.newColumnDef(0),
+							   					DTColumnDefBuilder.newColumnDef(1).notSortable(),
+												DTColumnDefBuilder.newColumnDef(2).notSortable(),
+												DTColumnDefBuilder.newColumnDef(3).notSortable()];
 
 							$scope.initCollapse = function() {
 								$scope.dataCollapseFlags = [];

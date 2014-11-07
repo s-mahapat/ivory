@@ -111,12 +111,12 @@ patientControllers.controller(
 							$scope.page = 1;
 
 							$scope.getTreatments = function(pagenum){
-								$scope.patient.treatmentplans = treatmentPlan.query({patientid: $scope.patientid},
+								treatmentplans = treatmentPlan.query({patientid: $scope.patientid},
 								  function(data, status, headers, config) {
 								    // this callback will be called asynchronously
 								    // when the response is available
 									// return data;
-									  $scope.patient.treatmentplans = data;
+									  $scope.patient.treatmentplans = treatmentplans;
 								  },
 								  function(data, status, headers, config) {
 								    // called asynchronously if an error occurs
@@ -126,14 +126,8 @@ patientControllers.controller(
 
 							$scope.getTreatments($scope.page);
 							
-							$scope.dtOptions = DTOptionsBuilder.newOptions()
-							.withPaginationType('full_numbers').withBootstrap()
-							.withDisplayLength(10);
-							
-							$scope.dtColumnDefs = [DTColumnDefBuilder.newColumnDef(0),
-							   					DTColumnDefBuilder.newColumnDef(1).notSortable(),
-												DTColumnDefBuilder.newColumnDef(2).notSortable(),
-												DTColumnDefBuilder.newColumnDef(3).notSortable()];
+							$scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers').withBootstrap();
+														
 
 							$scope.initCollapse = function() {
 								$scope.dataCollapseFlags = [];

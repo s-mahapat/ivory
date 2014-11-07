@@ -2,7 +2,7 @@
 	<div class="panel-heading">Treatment History</div>
 	<div class="panel-body" id="appointments">
 		<!-- Table -->
-		<table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-condensed table-hover">
+		<table datatable="ng" dt-options="dtOptions" dt-column-defs="" class="table table-condensed table-hover">
 			<thead>
 				<tr>
 					<th>&nbsp;</th>
@@ -24,7 +24,7 @@
 					<td>{{treatment_plan.paid}}</td>
 					<td>{{treatment_plan.balance}}</td>
 				</tr>
-				<tr ng-switch on="dataCollapseFlags[$index]">
+				<!--<tr ng-switch on="dataCollapseFlags[$index]">
 					<td colspan="8" ng-switch-when="true">
 						<div>
 							<div class="center-block" style="width: 85%;">
@@ -56,7 +56,7 @@
 							</div>
 						</div>
 					</td>
-				</tr>
+				</tr>-->
 			</tbody>
 		</table>
 	</div>

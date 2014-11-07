@@ -112,3 +112,7 @@ tr th:last-child {
 .rowselected{
 	background-color: #F5F5F5;
 }
+
+.center-text{
+	text-align: center;
+}

@@ -1,4 +1,4 @@
-var ivoryApp = angular.module('ivory', [ 'ngRoute', 'ngResource', 'datatables',
+var ivoryApp = angular.module('ivory', [ 'ngRoute', 'ngResource', 'ui.grid',
 		'patientControllers', 'doctorControllers', 'ivory.services',
 		'searchControllers' ]);
 

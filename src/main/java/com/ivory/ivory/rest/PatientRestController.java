@@ -71,7 +71,6 @@ public class PatientRestController {
 	
 	@RequestMapping(value="{patientid}/treatment/plan", method = RequestMethod.GET)
 	public List<TreatmentPlan> GetTreatmentPlans(@PathVariable int patientid){
-		int size = 5;
 		ManagePatient mp = new ManagePatient();
 		return mp.getTreatmentPlans(patientid);
 	}

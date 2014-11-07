@@ -1,26 +1,8 @@
 <div class="col-lg-12">
-    <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Address</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>Phone</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr dt-rows="" ng-repeat="patient in patients">
-            <td><a href="#/patient/details/{{patient.id}}" >{{ patient.id }}</a></td>
-            <td><a href="#/patient/details/{{patient.id}}" >{{ patient.fname }}</a></td>
-            <td>{{ patient.lname }}</td>
-            <td>{{ patient.address }}</td>
-            <td>{{ patient.email }}</td>
-            <td>{{ patient.mobile }}</td>
-            <td>{{ patient.phone }}</td>
-        </tr>
-        </tbody>
-    </table>
+	<div id="grid1" ui-grid="gridOptions" ui-grid-pagination class="grid"></div>
+	<div class="pull-right">
+		<a href="" ng-click="gridApi.pagination.previousPage()"><span class="glyphicon glyphicon-backward" ></span></a>	
+		<a href="" ng-click="gridApi.pagination.nextPage()"><span class="glyphicon glyphicon-forward" ></span></a>		
+	</div>
+	
 </div>

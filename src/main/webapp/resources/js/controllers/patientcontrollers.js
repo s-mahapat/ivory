@@ -11,7 +11,7 @@ var LOWER_PANE_VIEWS = {
 };
 
 /* Patient controllers */
-var patientControllers = angular.module('patientControllers', []);
+var patientControllers = angular.module('patientControllers', ['ui.grid', 'ui.grid.pagination', 'ui.grid.expandable', 'ui.grid.selection', 'ui.grid.pinning']);
 
 patientControllers.controller('NewPatientController', [
 		'$scope',
@@ -97,26 +97,59 @@ patientControllers.controller(
 						'PatientResource',
 						'$filter',
 						'TreatmentPlan',
-						'DTOptionsBuilder',
-						'DTColumnDefBuilder',
 						function($scope, $routeParams, patientRes,
-								$filter, treatmentPlan, DTOptionsBuilder, 
-								DTColumnDefBuilder) {
+								$filter, treatmentPlan) {
 							$scope.patientid = $routeParams.id;
 							$scope.patient = {};
 							$scope.selected_treatment_plan_id = 0;
 							$scope.treatmentplan = {};
 							$scope.selected_detail = {};
 							$scope.lower_pane_view = 0;
-							$scope.page = 1;
 
-							$scope.getTreatments = function(pagenum){
+							
+							$scope.gridOptions = {
+								enableSorting : true,
+								enablePagination: true,
+								rowsPerPage: 5,
+								minRowsToShow: 5,
+								enableHorizontalScrollbar: false,
+								enableVerticalScrollbar: false,
+								expandableRowTemplate: 'resources/partials/treatment_details_summary.html',
+								columnDefs : [{
+									name : 'Date',
+									field : 'date',
+								}, {
+									name : 'Description',
+									field : 'name',
+								}]
+							};
+								
+							$scope.gridOptions.onRegisterApi = function (gridApi) {
+								   $scope.gridApi = gridApi;
+								   $scope.gridApi.grid.registerRowBuilder(function(row){
+									   return row;
+								   });
+								   
+							};
+							
+							$scope.getTreatments = function(){
 								treatmentplans = treatmentPlan.query({patientid: $scope.patientid},
 								  function(data, status, headers, config) {
 								    // this callback will be called asynchronously
 								    // when the response is available
 									// return data;
 									  $scope.patient.treatmentplans = treatmentplans;
+									  $scope.gridOptions.data = $scope.patient.treatmentplans;
+									  for(i=0;i<data.length;i++){
+										  data[i].subGridOptions = {
+												  columnDefs: [{name: 'Date',
+												            	field: 'date',
+												  }, {
+													  name: 'Name',
+													  field: 'name',
+												  }],
+										  }
+									  }
 								  },
 								  function(data, status, headers, config) {
 								    // called asynchronously if an error occurs
@@ -124,11 +157,8 @@ patientControllers.controller(
 								  });
 							};
 
-							$scope.getTreatments($scope.page);
+							$scope.getTreatments();
 							
-							$scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers').withBootstrap();
-														
-
 							$scope.initCollapse = function() {
 								$scope.dataCollapseFlags = [];
 								for (var i = 0; i < $scope.patient.treatmentplans.length; i++) {

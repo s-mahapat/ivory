@@ -1,64 +1,7 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">Treatment History</div>
-	<div class="panel-body" id="appointments">
-		<!-- Table -->
-		<table datatable="ng" dt-options="dtOptions" dt-column-defs="" class="table table-condensed table-hover">
-			<thead>
-				<tr>
-					<th>&nbsp;</th>
-					<th>Start Date</th>
-					<th>Name</th>
-					<th>Amount</th>
-					<th>Paid</th>
-					<th>Balance</th>
-				</tr>
-			</thead>
-			<tbody ng-repeat="treatment_plan in patient.treatmentplans">
-				<tr dt-rows="" ng-init="plan_index=$index" ng-click="selectRow($index)"
-					class="ivory-expandable-row"
-					ng-class="{rowselected: dataCollapseFlags[$index]}">
-					<td><span class="glyphicon glyphicon-plus ivory-theme-color"></span></td>
-					<td>{{treatment_plan.date | date: 'longDate'}}</td>
-					<td>{{treatment_plan.name}}</td>
-					<td>{{treatment_plan.amount}}</td>
-					<td>{{treatment_plan.paid}}</td>
-					<td>{{treatment_plan.balance}}</td>
-				</tr>
-				<!--<tr ng-switch on="dataCollapseFlags[$index]">
-					<td colspan="8" ng-switch-when="true">
-						<div>
-							<div class="center-block" style="width: 85%;">
-								<table class="table table-condensed table-hover inner-table">
-									<thead>
-										<tr>
-											<th>Sl No.</th>
-											<th>Description</th>
-											<th>Date</th>
-											<th>Amount</th>
-											<th>Paid</th>
-											<th>Balance</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr
-											ng-repeat="detail in patient.treatmentplans[$index].details"
-											ng-click="showDetail(plan_index, $index)"
-											ng-class="{rowselected: detailCollapseFlags[$index]}">
-											<td>{{$index + 1}}</td>
-											<td>{{detail.description}}</td>
-											<td>{{detail.date}}</td>
-											<td>0</td>
-											<td>0</td>
-											<td>0</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</td>
-				</tr>-->
-			</tbody>
-		</table>
+	<div class="" id="appointments">
+		<div id="appointments-grid" ui-grid="gridOptions" ui-grid-pagination ui-grid-pinning ui-grid-expandable class="grid"></div>
 	</div>
 	<div class="panel-footer">
 		<div class="btn-group">

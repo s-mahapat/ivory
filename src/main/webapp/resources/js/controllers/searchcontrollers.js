@@ -15,18 +15,15 @@ searchControllers.controller('PatientSearchResultsController', [ '$scope',
 				minRowsToShow: 10,
 				enableHorizontalScrollbar: false,
 				enableVerticalScrollbar: false,				
-				columnDefs : [ {
-					name : 'ID',
-					field: 'id',
-					width: '5%',
-					cellClass: 'center-text',
-					cellTemplate : '<a href="#/patient/details/{{COL_FIELD}}">{{COL_FIELD}}</a>'
-				}, {
+				columnDefs : [{
 					name : 'First Name',
-					field : 'fname',					
+					field : 'fname',
+					//cellClass: 'center-text',
+					cellTemplate : '<a href="#/patient/details/{{row.entity.id}}">{{COL_FIELD}}</a>'
 				}, {
 					name : 'Last Name',
-					field : 'lname'
+					field : 'lname',
+					//cellClass: 'center-text',
 				}, {
 					field : 'address',
 					enableSorting : false
@@ -43,11 +40,11 @@ searchControllers.controller('PatientSearchResultsController', [ '$scope',
 			
 			$scope.gridOptions.onRegisterApi = function (gridApi) {
 				   $scope.gridApi = gridApi;
+				   $scope.gridApi.grid.registerRowBuilder(function(row){
+					   return row;
+				   });
+				   
 			};
-			
-			/*$scope.gridApi.registerRowBuilder = function(row){
-				alert(row);
-			};*/
 			
 			patientResource.query({
 				term : $routeParams.term

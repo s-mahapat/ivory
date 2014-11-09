@@ -95,10 +95,9 @@ patientControllers.controller(
 						'$scope',
 						'$routeParams',
 						'PatientResource',
-						'$filter',
 						'TreatmentPlan',
 						function($scope, $routeParams, patientRes,
-								$filter, treatmentPlan) {
+								treatmentPlan) {
 							$scope.patientid = $routeParams.id;
 							$scope.patient = {};
 							$scope.selected_treatment_plan_id = 0;
@@ -110,10 +109,10 @@ patientControllers.controller(
 							$scope.gridOptions = {
 								enableSorting : true,
 								enablePagination: true,
-								rowsPerPage: 5,
-								minRowsToShow: 5,
+								rowsPerPage: 10,
+								//minRowsToShow: 5,
 								enableHorizontalScrollbar: false,
-								enableVerticalScrollbar: false,
+								enableVerticalScrollbar: true,
 								expandableRowTemplate: 'resources/partials/treatment_details_summary.html',
 								columnDefs : [{
 									name : 'Date',
@@ -121,7 +120,7 @@ patientControllers.controller(
 								}, {
 									name : 'Description',
 									field : 'name',
-								}]
+								},]
 							};
 								
 							$scope.gridOptions.onRegisterApi = function (gridApi) {
@@ -142,11 +141,24 @@ patientControllers.controller(
 									  $scope.gridOptions.data = $scope.patient.treatmentplans;
 									  for(i=0;i<data.length;i++){
 										  data[i].subGridOptions = {
-												  columnDefs: [{name: 'Date',
-												            	field: 'date',
+												  enableSorting : false,
+												  columnDefs: [{
+														name : 'ID',
+														field : 'id',
+												  }, {name: 'Date',
+												      field: 'date',
 												  }, {
 													  name: 'Name',
 													  field: 'name',
+												  }, {
+														name : 'Cost',
+														field : 'price',
+												  }, {
+														name : 'Paid',
+														field : 'paid',
+												  }, {
+														name : 'Balance',
+														field : 'balance',
 												  }],
 										  }
 									  }
@@ -159,7 +171,7 @@ patientControllers.controller(
 
 							$scope.getTreatments();
 							
-							$scope.initCollapse = function() {
+							/*$scope.initCollapse = function() {
 								$scope.dataCollapseFlags = [];
 								for (var i = 0; i < $scope.patient.treatmentplans.length; i++) {
 									$scope.dataCollapseFlags.push(false);
@@ -188,7 +200,7 @@ patientControllers.controller(
 									$scope.selected_treatment_plan_id = $scope.patient.treatmentplans[index].id;
 								}
 
-							};
+							};*/
 
 							$scope.setDetailView = function(id) {
 								$scope.lower_pane_view = id;
@@ -243,13 +255,6 @@ patientControllers.controller(
 								}else{
 									$scope.addNewTreatmentDetail();
 								}
-							};
-
-							$scope.showPage = function(pagenum){
-								if(pagenum < 1)
-									return;
-								$scope.page = pagenum;
-								$scope.getTreatments($scope.page);
 							};
 
 						} ]);

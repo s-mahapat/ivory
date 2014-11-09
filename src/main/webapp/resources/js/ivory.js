@@ -18,9 +18,9 @@ ivoryApp.config(function($routeProvider, $httpProvider) {
 	}).when('/patient/edit/:id', {
 		templateUrl : 'resources/partials/patient_registration.html',
 		controller : 'EditPatientController'
-	}).when('/patient/search/:term', {
+	}).when('/:whom/search/:term', {
 		templateUrl : 'resources/partials/search_results.html',
-		controller : 'PatientSearchResultsController'
+		controller : 'SearchResultsController'
 	});
 
 	$httpProvider.interceptors.push(function($q) {

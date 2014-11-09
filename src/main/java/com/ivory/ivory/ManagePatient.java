@@ -133,11 +133,13 @@ public class ManagePatient {
 	@SuppressWarnings("unchecked")
 	public List<Patient> searchPatient(String searchString) {
 		Session session = Hbutil.getSessionFactory().openSession();
-		Transaction tx = null;
 		List<Patient> patients = null;
-		try {
-			tx = session.beginTransaction();
-			// Add restriction.
+		Criterion completeCr = null;
+		try{
+			Criterion idCr = Restrictions.idEq(Integer.parseInt(searchString));
+			completeCr = Restrictions.disjunction().add(idCr);
+		}catch(NumberFormatException ex){
+			log.debug("Searching by id I guess");
 			Criterion fnameCr = Restrictions.like("fname", searchString,
 					MatchMode.ANYWHERE);
 			Criterion lnameCr = Restrictions.like("lname", searchString,
@@ -146,17 +148,15 @@ public class ManagePatient {
 					MatchMode.EXACT);
 			Criterion emailCr = Restrictions.like("email", searchString,
 					MatchMode.ANYWHERE);
-			Criterion completeCr = Restrictions.disjunction().add(fnameCr)
+			completeCr = Restrictions.disjunction().add(fnameCr)
 					.add(lnameCr).add(mobileCr).add(emailCr);
+		} 
+		
+		try {
 			Criteria cr = session.createCriteria(Patient.class);
 			cr.add(completeCr);
-			//cr.setFirstResult(skip);
-			//cr.setMaxResults(pageSize);
 			patients = cr.list();
-			tx.commit();
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
 			log.fatal(e);
 		} finally {
 			session.close();

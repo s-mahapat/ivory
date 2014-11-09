@@ -1,6 +1,6 @@
-<link rel="stylesheet" type="text/css"	href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
 
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap-glyphicons.css"><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular.min.js"></script>
@@ -19,8 +19,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/doctorControllers.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/patientcontrollers.js"></script>
 
-<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> 
+<!--<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>-->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib/common.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ui-grid/ui-grid-unstable.css" />

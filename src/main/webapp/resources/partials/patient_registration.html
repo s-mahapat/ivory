@@ -5,35 +5,35 @@
 			<label class="control-label col-lg-3" for="fname">First Name</label>
 			<div class="col-lg-8">
 				<input class="form-control input-sm" type="text" name="fname" id="fname"
-					placeholder="First Name" ng-model="patient.fname" required>
+					placeholder="First Name" ng-model="patient.fname" required tabindex="1" autofocus>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="email">Email</label>
 			<div class="col-lg-8">
 				<input class="form-control input-sm" type="email" id="email" name="email"
-					placeholder="Email" ng-model="patient.email">
+					placeholder="Email" ng-model="patient.email" tabindex="3">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="dob">Date of Birth</label>
 			<div class="col-lg-8">
 				<input class="form-control input-sm" type="date" id="dob" name="dob"
-					placeholder="Date of birth" autocomplete="off" ng-model="patient.dob">
+					placeholder="Date of birth" autocomplete="off" ng-model="patient.dob" tabindex="4">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="phone">Phone</label>
 			<div class="col-lg-8">
 				<input class="form-control input-sm" type="tel" id="phone" name="phone"
-					placeholder="Phone" autocomplete="off" ng-model="patient.phone">
+					placeholder="Phone" autocomplete="off" ng-model="patient.phone" tabindex="5">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="mobile">Mobile</label>
 			<div class="col-lg-8">
 				<input class="form-control input-sm" type="text" id="mobile" name="mobile"
-					placeholder="Mobile" autocomplete="off" ng-model="patient.mobile">
+					placeholder="Mobile" autocomplete="off" ng-model="patient.mobile" tabindex="6">
 			</div>
 		</div>
 	</div>
@@ -42,16 +42,16 @@
 			<label class="control-label col-lg-3" for="lname">Last Name</label>
 			<div class="col-lg-8">
 				<input class="form-control input-sm" type="text" id="lname" name="lname"
-					placeholder="Last Name" ng-model="patient.lname">
+					placeholder="Last Name" ng-model="patient.lname" tabindex="2">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="gender">Gender</label>
 			<div class="btn-group col-lg-8">
 				<label class="radio-inline"> <input type="radio"
-					name="gender" ng-model="patient.gender" value="M" required ng-required="!patient.gender">M
+					name="gender" ng-model="patient.gender" value="M" required ng-required="!patient.gender" tabindex="7">M
 				</label> <label class="radio-inline"> <input type="radio"
-					name="gender" ng-model="patient.gender" value="F" required ng-required="!patient.gender">F
+					name="gender" ng-model="patient.gender" value="F" required ng-required="!patient.gender" tabindex="8">F
 				</label>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 			<label class="control-label col-lg-3" for="address">Address</label>
 			<div class="col-lg-8">
 				<textarea class="form-control input-sm" id="address" name="address" required
-					ng-model="patient.address"></textarea>
+					ng-model="patient.address" tabindex="9"></textarea>
 			</div>
 		</div>
 	</div>

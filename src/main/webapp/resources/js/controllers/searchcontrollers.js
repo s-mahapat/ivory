@@ -3,10 +3,13 @@
  */
 var searchControllers = angular.module('searchControllers', ['ui.grid', 'ui.grid.pagination']);
 
-searchControllers.controller('PatientSearchResultsController', [ '$scope',
-		'$routeParams', 'PatientResource',
-		function($scope, $routeParams, patientResource) {
-			$scope.term = $routeParams.term;			
+searchControllers.controller('SearchResultsController', [ '$scope',
+		'$routeParams', 'PatientResource', 'DoctorResource',
+		function($scope, $routeParams, patientResource, $doctor) {
+			$scope.term = $routeParams.term;
+			$scope.whom = $routeParams.whom;
+			$scope.searchPatient = true;
+			
 			
 			$scope.gridOptions = {
 				enableSorting : true,
@@ -15,15 +18,19 @@ searchControllers.controller('PatientSearchResultsController', [ '$scope',
 				minRowsToShow: 10,
 				enableHorizontalScrollbar: false,
 				enableVerticalScrollbar: false,				
-				columnDefs : [{
+				columnDefs : [{name: 'ID',
+					field: 'id',
+					cellClass: 'ui-grid-cell-contents',
+					cellTemplate : '<a href="#/' + $scope.whom + '/details/{{row.entity.id}}">{{COL_FIELD}}</a>'
+				},
+				{
 					name : 'First Name',
 					field : 'fname',
-					//cellClass: 'center-text',
-					cellTemplate : '<a href="#/patient/details/{{row.entity.id}}">{{COL_FIELD}}</a>'
+					cellClass: 'ui-grid-cell-contents',
+					cellTemplate : '<a href="#/' + $scope.whom + '/details/{{row.entity.id}}">{{COL_FIELD}}</a>'
 				}, {
 					name : 'Last Name',
 					field : 'lname',
-					//cellClass: 'center-text',
 				}, {
 					field : 'address',
 					enableSorting : false
@@ -46,18 +53,49 @@ searchControllers.controller('PatientSearchResultsController', [ '$scope',
 				   
 			};
 			
-			patientResource.query({
-				term : $routeParams.term
-			}, function(data) {
-				$scope.gridOptions.data = data;
-			});
 			
+			$scope.search = function(searchPatient){
+				whatToSearch = patientResource;
+				if(!searchPatient){
+					whatToSearch = $doctor;
+				}
+				whatToSearch.query({
+					term : $scope.term
+				}, function(data) {
+					$scope.gridOptions.data = data;
+					$scope.term = {};
+				});
+			}
+			
+			if($scope.whom === 'doctor'){
+				$scope.searchPatient = false;
+			}
+
+			//search now
+			$scope.search($scope.searchPatient);
 			
 		} ]);
 
-searchControllers.controller('PatientSearchController', [ '$scope',
+searchControllers.controller('SearchController', [ '$scope',
 		'$location', function($scope, $location) {
+			$scope.searchPatient = true;
+			// default search for patient
+			$scope.whom = 'patient';
+			
+			$scope.setSearchOption = function(id){
+				if(id === 1){
+					$scope.searchPatient = true;
+					$scope.whom = 'patient';
+				}
+				else{
+					$scope.searchPatient = false;
+					$scope.whom = 'doctor';
+				}
+					
+			}
+			
 			$scope.submit = function() {
-				$location.url("patient/search/" + $scope.term);
+				$location.url($scope.whom + "/search/" + $scope.term);
+				$scope.term = null;
 			};
 		} ]);

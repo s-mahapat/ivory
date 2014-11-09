@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-	width: 90%;
+	width: 95%;
 }
 
 #maindiv {
@@ -23,15 +23,6 @@ body {
 	background-color: white;
 }
 
-#menuandsearch {
-	width: 100%;
-	/*background-color: #157FCC;
-	border:1px solid #336699;
-	float: right;*/
-	border-radius: 4px;
-	margin-bottom: 5px;
-}
-
 .ivory-theme-color{
 	color: #428BCA;
 }
@@ -39,59 +30,6 @@ body {
 a.edit-link,a.edit-link:hover {
 	cursor: pointer;
 	color: white;
-}
-
-.gridStyle {
-	border: 1px solid rgb(212, 212, 212);
-	width: auto;
-	height: auto !important;
-}
-
-.ngViewport.ng-scope {
-	height: 100% !important;
-}
-
-.ivory-expandable-row{
-	cursor: pointer;
-}
-
-table {
-  /*border-collapse: separate;*/
-  border-spacing: 0 0px;
-}
-
-.table tbody + tbody{
-	border-top: 1px solid #DDD;
-}
-
-
-tr td:first-child,
-tr th:first-child {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-}
-
-tr td:last-child,
-tr th:last-child {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-
-.inner-table tr th{
-	color: orange;
-}
-
-.inner-table tr th,
-.inner-table tr td{
-	cursor: pointer;
-}
-
-.row-expand-icon{
-	color: #428BCA;
-}
-
-.footer-pagination{
-	margin: -8px 0 0 0;
 }
 
 .ivory-email-link{
@@ -109,9 +47,6 @@ tr th:last-child {
 	font-weight: normal;
 }
 
-.rowselected{
-	background-color: #F5F5F5;
-}
 
 .center-text{
 	text-align: center;

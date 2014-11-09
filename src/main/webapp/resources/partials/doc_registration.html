@@ -3,31 +3,31 @@
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="fname">First Name</label>
 			<div class="col-lg-8">
-				<input class="form-control" type="text" name="fname" id="fname" placeholder="First Name" ng-model="doctor.fname" required>
+				<input autofocus tabindex="1" class="form-control input-sm" type="text" name="fname" id="fname" placeholder="First Name" ng-model="doctor.fname" required>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="email">Email</label>
 			<div class="col-lg-8">
-				<input class="form-control" type="text" id="email" name="email" placeholder="Email" ng-model="doctor.email">
+				<input tabindex="3" class="form-control input-sm" type="text" id="email" name="email" placeholder="Email" ng-model="doctor.email">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="dob">Date of Birth</label>
 			<div class="col-lg-8">
-				<input class="form-control" type="text" id="dob" name="dob" placeholder="YYYY-MM-DD" autocomplete="off" ng-model="doctor.dob">
+				<input tabindex="4" class="form-control input-sm" type="date" id="dob" name="dob" placeholder="Date of birth" autocomplete="off" ng-model="doctor.dob">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="phone">Phone</label>
 			<div class="col-lg-8">
-				<input class="form-control" type="text" id="phone" name="phone" placeholder="Phone" autocomplete="off" ng-model="doctor.phone">
+				<input tabindex="5" class="form-control input-sm" type="text" id="phone" name="phone" placeholder="Phone" autocomplete="off" ng-model="doctor.phone">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="mobile">Mobile</label>
 			<div class="col-lg-8">
-				<input class="form-control" type="text" id="mobile" name="mobile" placeholder="Mobile" autocomplete="off" ng-model="doctor.mobile">
+				<input tabindex="6" class="form-control input-sm" type="text" id="mobile" name="mobile" placeholder="Mobile" autocomplete="off" ng-model="doctor.mobile">
 			</div>
 		</div>
 	</div>
@@ -35,15 +35,15 @@
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="lname">Last Name</label>
 			<div class="col-lg-8">
-				<input class="form-control" type="text" id="lname" name="lname" placeholder="Last Name" ng-model="doctor.lname">
+				<input tabindex="2" class="form-control input-sm" type="text" id="lname" name="lname" placeholder="Last Name" ng-model="doctor.lname">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="gender">Gender</label>
 			<div class="btn-group col-lg-8">
-				<label class="radio-inline"> <input type="radio"
+				<label class="radio-inline"> <input tabindex="7" type="radio"
 					name="gender" ng-model="doctor.gender" value="M">M
-				</label> <label class="radio-inline"> <input type="radio"
+				</label> <label class="radio-inline"> <input tabindex="8" type="radio"
 					name="gender" ng-model="doctor.gender" value="F">F
 				</label>
 			</div>
@@ -51,14 +51,14 @@
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="address">Address</label>
 			<div class="col-lg-8">
-				<textarea class="form-control" id="address" name="address" required ng-model="doctor.address"></textarea>
+				<textarea tabindex="9" class="form-control" id="address" name="address" required ng-model="doctor.address"></textarea>
 			</div>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-lg-offset-10 col-lg-2">
-			<button id="submit" type="submit" class="btn btn-primary btn-sm">Save</button>
-			<button type="reset" class="btn btn-primary btn-sm">Reset</button>
+			<button tabindex="10" id="submit" type="submit" class="btn btn-primary btn-xs">Save</button>
+			<button tabindex="11" ng-disabled="doctorform.$pristine" type="reset" class="btn btn-primary btn-xs">Reset</button>
 		</div>
 	</div>
 </form>

@@ -5,13 +5,18 @@ package com.ivory.ivory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import com.ivory.ivory.models.Patient;
 import com.ivory.ivory.models.Appointment;
 
 public class ManageAppointment {
+	
+	private static Logger log = Logger.getLogger(ManageAppointment.class.getName());
 
 	public Appointment addAppointment(int patientID, Appointment appointment) {
 		Session session = Hbutil.getSessionFactory().openSession();
@@ -27,8 +32,9 @@ public class ManageAppointment {
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
-			e.printStackTrace();
+			log.fatal(e);
 		} finally {
+			session.flush();
 			session.close();
 		}
 		return newappointment;
@@ -41,7 +47,7 @@ public class ManageAppointment {
 			Patient patient = (Patient) session.get(Patient.class, id);
 			appointments.addAll(patient.getAppointments());
 		} catch (HibernateException e) {
-			e.printStackTrace();
+			log.fatal(e);
 		} finally {
 			session.close();
 		}

@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -44,6 +45,8 @@ public class Patient implements Serializable{
 	
 	private String fname;
 	private String lname;
+	@Transient
+	private String name;
 	private String address;
 	private String email;
 	
@@ -99,6 +102,10 @@ public class Patient implements Serializable{
 
 	public void setLname(String last_name) {
 		this.lname = last_name;
+	}
+	
+	public String getName(){
+		return getFname().concat(" ").concat(getLname());
 	}
 	
 	public String getEmail() {

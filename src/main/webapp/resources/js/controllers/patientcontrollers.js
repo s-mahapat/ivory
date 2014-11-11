@@ -266,10 +266,40 @@ patientControllers.controller('NewAppointmentController', [
 		'$location',
 		'AppointmentResource',
 		'DoctorResource',
-		function($scope, $routeParams, $location, $appointment, $doctor) {
+		'$filter',
+		function($scope, $routeParams, $location, $appointment, $doctor, $filter) {
 			$scope.appointments = {};
 			$scope.doctors = {};
 			$scope.appointment = new Object();
+			
+			$scope.gridOptions = {
+				enableSorting : true,
+				enablePagination: true,
+				rowsPerPage: 5,
+				minRowsToShow: 5,
+				enableHorizontalScrollbar: false,
+				enableVerticalScrollbar: false,
+				columnDefs : [
+				{
+					name : 'Date',
+					field : 'appointmentdate',
+				}, {
+					name : 'Reason',
+					field: 'appointmentreason',
+				}, {
+					name: 'Doctor',
+					field: 'doctor.name'
+				}]
+			};
+			
+			$scope.gridOptions.onRegisterApi = function (gridApi) {
+				   $scope.gridApi = gridApi;
+				   $scope.gridApi.grid.registerRowBuilder(function(row){
+					   row.entity.appointmentdate = $filter('date')(row.entity.appointmentdate, 'medium');
+					   return row;
+				   });
+				   
+			};
 									
 			$scope.getAppointments = function(id){
 				$scope.appointments = $appointment.query({
@@ -285,6 +315,7 @@ patientControllers.controller('NewAppointmentController', [
 			
 			$scope.getDoctors();
 			$scope.getAppointments();
+			$scope.gridOptions.data = $scope.appointments;
 			
 			$scope.submitForm = function() {
 				$scope.appointment.patientid = $routeParams.id;

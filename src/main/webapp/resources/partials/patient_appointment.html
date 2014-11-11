@@ -3,8 +3,8 @@
 	ng-submit="submitForm()">
 	<div class="col-lg-4">
 		<div class="form-group">
-			<label class="control-label col-lg-3" for="appointmentdate">Date</label>
-			<div class="col-lg-9">
+			<label class="control-label col-lg-2" for="appointmentdate">Date</label>
+			<div class="col-lg-10">
 				<input class="form-control input-sm" type="datetime-local" placeholder="" name="appointmentdate"
 					id="appointmentdate" placeholder="Appointment Date"
 					ng-model="appointment.appointmentdate" required>
@@ -14,8 +14,8 @@
 	</div>
 	<div class="col-lg-4">
 		<div class="form-group">
-			<label class="control-label col-lg-3" for="appointmentreason">Reason</label>
-			<div class="col-lg-8">
+			<label class="control-label col-lg-2" for="appointmentreason">Reason</label>
+			<div class="col-lg-10">
 				<input class="form-control input-sm" type="text" id="appointmentreason"
 					name="appointmentreason" placeholder="Reason for Appointment"
 					ng-model="appointment.appointmentreason">
@@ -24,8 +24,8 @@
 	</div>
 	<div class="col-lg-4">
 		<div class="form-group">
-			<label class="control-label col-lg-3" for="appointmentreason">Doctor</label>
-			<div class="col-lg-8">
+			<label class="control-label col-lg-2" for="appointmentreason">Doctor</label>
+			<div class="col-lg-10">
 				<select required class="form-control input-sm" ng-model="appointment.doctor" ng-options="doctor.fname + ' ' + doctor.lname for doctor in doctors">
 					<option value="">Select</option>
 				</select>
@@ -40,9 +40,14 @@
 	</div>
 
 	<div class="panel panel-primary">
-		<div class="panel-heading">Last 5 Appointment Details</div>
+		<div class="panel-heading">Appointment History</div>
 		<div class="panel-body" id="appointments">
-			<!-- Table -->
+			<div id="appointment-grid" ui-grid="gridOptions" ui-grid-pagination class="grid"></div>
+			<div class="pull-right">
+				<a href="" ng-click="gridApi.pagination.previousPage()"><span class="glyphicon glyphicon-backward" ></span></a>	
+				<a href="" ng-click="gridApi.pagination.nextPage()"><span class="glyphicon glyphicon-forward" ></span></a>		
+			</div>
+			<!-- Table 
 			<table class="table table-condensed table-hover">
 				<thead>
 					<tr>
@@ -52,13 +57,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr dt-rows="" ng-repeat="appointment in appointments">
+					<tr ng-repeat="appointment in appointments">
 						<td>{{ appointment.appointmentdate | date: 'medium' }}</td>
 						<td>{{ appointment.appointmentreason }}</td>
 						<td>{{appointment.doctor.fname}} {{appointment.doctor.lname}}</td>
 					</tr>
 				</tbody>
-			</table>
+			</table>-->
 		</div>
 	</div>
 </form>

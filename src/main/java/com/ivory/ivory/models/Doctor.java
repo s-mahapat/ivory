@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -44,6 +45,8 @@ public class Doctor implements Serializable {
 	private String gender;
 	private String phone;
 	private String mobile;
+	@Transient
+	private String name;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "doctor")
 	@JsonIgnore(true)
@@ -71,6 +74,10 @@ public class Doctor implements Serializable {
 
 	public void setLname(String last_name) {
 		this.lname = last_name;
+	}
+	
+	public String getName(){
+		return getFname().concat(" ").concat(getLname());
 	}
 	
 	public String getEmail() {

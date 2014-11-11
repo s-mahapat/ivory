@@ -1,25 +1,34 @@
 <form class="form-horizontal" name="appointmentform"
 	id="appointmentform"
 	ng-submit="submitForm()">
-	<div class="col-lg-6">
+	<div class="col-lg-4">
 		<div class="form-group">
-			<label class="control-label col-lg-3" for="appointmentdate">Appointment
-				Date</label>
-			<div class="col-lg-8">
-				<input class="form-control" type="datetime-local" placeholder="" name="appointmentdate"
+			<label class="control-label col-lg-3" for="appointmentdate">Date</label>
+			<div class="col-lg-9">
+				<input class="form-control input-sm" type="datetime-local" placeholder="" name="appointmentdate"
 					id="appointmentdate" placeholder="Appointment Date"
 					ng-model="appointment.appointmentdate" required>
 			</div>
 		</div>
 		
 	</div>
-	<div class="col-lg-6">
+	<div class="col-lg-4">
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="appointmentreason">Reason</label>
 			<div class="col-lg-8">
-				<input class="form-control" type="text" id="appointmentreason"
+				<input class="form-control input-sm" type="text" id="appointmentreason"
 					name="appointmentreason" placeholder="Reason for Appointment"
 					ng-model="appointment.appointmentreason">
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4">
+		<div class="form-group">
+			<label class="control-label col-lg-3" for="appointmentreason">Doctor</label>
+			<div class="col-lg-8">
+				<select required class="form-control input-sm" ng-model="appointment.doctor" ng-options="doctor.fname + ' ' + doctor.lname for doctor in doctors">
+					<option value="">Select</option>
+				</select>
 			</div>
 		</div>
 	</div>
@@ -37,14 +46,16 @@
 			<table class="table table-condensed table-hover">
 				<thead>
 					<tr>
-						<th>Appointment Date</th>
+						<th>Date</th>
 						<th>Reason</th>
+						<th>Doctor</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr dt-rows="" ng-repeat="appointment in appointments">
 						<td>{{ appointment.appointmentdate | date: 'medium' }}</td>
 						<td>{{ appointment.appointmentreason }}</td>
+						<td>{{appointment.doctor}}</td>
 					</tr>
 				</tbody>
 			</table>

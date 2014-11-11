@@ -79,4 +79,18 @@ public class ManageDoctor {
 		return doctors;
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Doctor> listDoctorss() {
+		Session session = Hbutil.getSessionFactory().openSession();
+		List<Doctor> doctors = null;
+		try {
+			doctors = session.createCriteria(Doctor.class).list();
+		} catch (HibernateException e) {
+			log.fatal(e);
+		} finally {
+			session.close();
+		}
+		return doctors;
+	}
 }

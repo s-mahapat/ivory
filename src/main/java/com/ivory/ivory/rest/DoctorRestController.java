@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ivory.ivory.models.Doctor;
+import com.ivory.ivory.models.Patient;
 import com.ivory.ivory.ManageDoctor;
+import com.ivory.ivory.ManagePatient;
 
 
 @RestController
@@ -22,6 +24,13 @@ public class DoctorRestController {
 	public Doctor SaveDoctor(@RequestBody Doctor doctor) {
 		ManageDoctor md = new ManageDoctor();
 		return md.addDoctor(doctor);
+	}
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public List<Doctor> GetDoctors() {
+		ManageDoctor md = new ManageDoctor();
+		List<Doctor> doctors = md.listDoctorss();
+		return doctors;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)

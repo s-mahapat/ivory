@@ -34,6 +34,11 @@ ivoryServices.factory('DoctorResource', [ '$resource', function($resource) {
 		'update' : {
 			method : 'PUT',
 		},
+		'list':{
+			method: 'GET',
+			url: 'rest/doctor/list',
+			isArray:true,
+		}
 
 	});
 	return Doctor;

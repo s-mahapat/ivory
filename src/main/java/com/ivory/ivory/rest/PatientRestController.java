@@ -15,6 +15,7 @@ import com.ivory.ivory.ManageAppointment;
 import com.ivory.ivory.ManageMedicalHistory;
 import com.ivory.ivory.ManagePatient;
 import com.ivory.ivory.models.Appointment;
+import com.ivory.ivory.models.Doctor;
 import com.ivory.ivory.models.MedicalHistoryQuestion;
 import com.ivory.ivory.models.Patient;
 import com.ivory.ivory.models.TreatmentPlan;
@@ -76,8 +77,11 @@ public class PatientRestController {
 	}
 	
 	@RequestMapping(value="{patientid}/appointment", method = RequestMethod.POST)
-	public Appointment SaveAppointment(@PathVariable int patientid, @RequestBody Appointment appointment) {
+	public Appointment SaveAppointment(@PathVariable int patientid, 
+			@RequestBody Appointment appointment
+			/*@RequestBody Doctor doctor*/) {
 		ManageAppointment md = new ManageAppointment();
+		//appointment.setDoctor(doctor);
 		return md.addAppointment(patientid, appointment);
 	}
 

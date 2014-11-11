@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,6 +41,11 @@ public class Appointment implements Serializable {
 	@JsonIgnore(true)
 	private Patient patient;
 	
+	@ManyToOne
+	@JoinColumn(name = "doctorId")
+	@JsonIgnore(true)
+	private Doctor doctor;
+	
 	@Column
 	private Timestamp appointmentdate;
 
@@ -59,6 +65,14 @@ public class Appointment implements Serializable {
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
+	}
+	
+	public Doctor getDoctor(){
+		return this.doctor;
+	}
+	
+	public void setDoctor(Doctor doctor){
+		this.doctor = doctor;
 	}
 
 	public Timestamp getAppointmentdate() {

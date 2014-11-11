@@ -265,8 +265,10 @@ patientControllers.controller('NewAppointmentController', [
 		'$routeParams',
 		'$location',
 		'AppointmentResource',
-		function($scope, $routeParams, $location, $appointment) {
+		'DoctorResource',
+		function($scope, $routeParams, $location, $appointment, $doctor) {
 			$scope.appointments = {};
+			$scope.doctors = {};
 			$scope.appointment = new Object();
 									
 			$scope.getAppointments = function(id){
@@ -275,6 +277,13 @@ patientControllers.controller('NewAppointmentController', [
 				});
 			}
 			
+			$scope.getDoctors = function(){
+				$doctor.list({}, 
+						function(data){$scope.doctors = data}, 
+						function(){});
+			}
+			
+			$scope.getDoctors();
 			$scope.getAppointments();
 			
 			$scope.submitForm = function() {

@@ -3,16 +3,25 @@
  */
 package com.ivory.ivory.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -36,6 +45,10 @@ public class Doctor implements Serializable {
 	private String gender;
 	private String phone;
 	private String mobile;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "doctor")
+	@JsonIgnore(true)
+	private List<Appointment> appointments = new ArrayList<Appointment>();
 
 	public Doctor() {
 	}
@@ -121,6 +134,19 @@ public class Doctor implements Serializable {
 
 	public void setMobile(String _mobile) {
 		this.mobile = _mobile;
+	}
+	
+	public List<Appointment> getAppointments(){
+		return this.appointments;
+	}
+	
+	public void setAppointments(List<Appointment> aps){
+		this.appointments = aps;
+	}
+	
+	public void addAppointment(Appointment app){
+		app.setDoctor(this);
+		this.appointments.add(app);
 	}
 	
 }

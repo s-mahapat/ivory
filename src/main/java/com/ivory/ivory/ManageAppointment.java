@@ -15,6 +15,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import com.ivory.ivory.models.Doctor;
 import com.ivory.ivory.models.Patient;
 import com.ivory.ivory.models.Appointment;
 

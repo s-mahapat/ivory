@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.ivory.ivory.models.Doctor;
-import com.ivory.ivory.models.Patient;
 import com.ivory.ivory.ManageDoctor;
-import com.ivory.ivory.ManagePatient;
+
 
 
 @RestController

@@ -55,7 +55,7 @@
 					<tr dt-rows="" ng-repeat="appointment in appointments">
 						<td>{{ appointment.appointmentdate | date: 'medium' }}</td>
 						<td>{{ appointment.appointmentreason }}</td>
-						<td>{{appointment.doctor}}</td>
+						<td>{{appointment.doctor.fname}} {{appointment.doctor.lname}}</td>
 					</tr>
 				</tbody>
 			</table>

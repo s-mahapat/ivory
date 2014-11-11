@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,20 +48,6 @@ public class Doctor implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "doctor")
 	@JsonIgnore(true)
 	private List<Appointment> appointments = new ArrayList<Appointment>();
-
-	public Doctor() {
-	}
-
-	public Doctor(String fname, String lname, String email, String address, Date dob, String gender, String phone, String mobile) {
-		this.fname = fname;
-		this.lname = lname;
-		this.email = email;
-		this.address = address;
-		this.dob = dob;
-		this.gender = gender;
-		this.phone = phone;
-		this.mobile = mobile;
-	}
 
 	public int getId() {
 		return id;

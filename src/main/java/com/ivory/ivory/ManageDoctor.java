@@ -13,9 +13,8 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.apache.log4j.Logger;
-
 import com.ivory.ivory.models.Doctor;
-import com.ivory.ivory.models.Patient;
+
 
 public class ManageDoctor {
 	

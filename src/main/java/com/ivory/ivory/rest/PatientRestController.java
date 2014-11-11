@@ -1,8 +1,15 @@
 package com.ivory.ivory.rest;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
+import java.util.TimeZone;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
 import com.ivory.ivory.ManageAppointment;
 import com.ivory.ivory.ManageMedicalHistory;
 import com.ivory.ivory.ManagePatient;
@@ -77,11 +85,27 @@ public class PatientRestController {
 	}
 	
 	@RequestMapping(value="{patientid}/appointment", method = RequestMethod.POST)
-	public Appointment SaveAppointment(@PathVariable int patientid, 
-			@RequestBody Appointment appointment
-			/*@RequestBody Doctor doctor*/) {
+	public Appointment SaveAppointment(@PathVariable int patientid, @RequestBody String req) throws JSONException, ParseException {
+		JSONObject jObject  = new JSONObject(req);
+		JSONObject json_doctor = jObject.getJSONObject("doctor");
+		
+		Gson gson = new Gson();
+		Doctor doctor = gson.fromJson(json_doctor.toString(), Doctor.class);		
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+	    Date parsedTimeStamp = dateFormat.parse((String) jObject.get("appointmentdate"));
+	    Timestamp timestamp = new Timestamp(parsedTimeStamp.getTime());
+	    
+	    Appointment appointment = new Appointment();
+	    
+	    appointment.setAppointmentdate(timestamp);
+	    appointment.setAppointmentreason((String) jObject.get("appointmentreason"));
+
+		doctor.addAppointment(appointment);
+		
 		ManageAppointment md = new ManageAppointment();
-		//appointment.setDoctor(doctor);
+		
 		return md.addAppointment(patientid, appointment);
 	}
 

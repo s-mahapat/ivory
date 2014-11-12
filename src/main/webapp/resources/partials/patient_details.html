@@ -13,7 +13,7 @@
 		</div>
 	</div>
 	<div class="col-lg-8" ng-if="details.view == 1">
-		<div class="panel panel-primary">Dashboard</div>
+		<ng-include src="'resources/partials/patient_dashboard.html'"></ng-include>
 	</div>
 	<div class="col-lg-8" ng-if="details.view == 2" ng-controller="NewAppointmentController">
 		<ng-include src="'resources/partials/patient_appointment.html'"></ng-include>

@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -59,10 +60,12 @@ public class Patient implements Serializable{
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "patient")
 	@JsonIgnore(true)
+	@OrderBy("id DESC")
 	private List<TreatmentPlan> treatmentPlans = new ArrayList<TreatmentPlan>();
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "patient")
 	@JsonIgnore(true)
+	@OrderBy("id DESC")
 	private List<Appointment> appointments = new ArrayList<Appointment>();
 	
 

@@ -21,7 +21,7 @@
 		<div id="bodydiv" class="row">
 			<div ng-view></div>
 		</div>
-		<div ng-controller="" id="statusmessage" class="alert" ng-class="{'alert-danger': error}"
+		<div id="statusmessage" class="alert" ng-class="{'alert-danger': error}"
 			role="alert">
 			<span id="alert-text"></span>
 		</div>

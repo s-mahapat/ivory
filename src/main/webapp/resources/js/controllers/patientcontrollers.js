@@ -170,37 +170,6 @@ patientControllers.controller(
 							};
 
 							$scope.getTreatments();
-							
-							/*$scope.initCollapse = function() {
-								$scope.dataCollapseFlags = [];
-								for (var i = 0; i < $scope.patient.treatmentplans.length; i++) {
-									$scope.dataCollapseFlags.push(false);
-								}
-							};
-
-							$scope.selectRow = function(index) {
-								$scope.detailCollapseFlags = [];
-								// always hide the lower pane and then reopen
-								// again
-								$scope.resetDetailView();
-								// check if its not initialized yet
-								if (typeof $scope.dataCollapseFlags == 'undefined') {
-									$scope.initCollapse();
-								}
-								// if the row is already selected, collapse the
-								// row
-								if ($scope.dataCollapseFlags[index] == true) {
-									$scope.dataCollapseFlags[index] = false;
-									$scope.selected_treatment_plan_id = 0;
-								} else {
-									// if the row is collapsed, collapse any
-									// open rows and then expand this row
-									$scope.initCollapse();
-									$scope.dataCollapseFlags[index] = true;
-									$scope.selected_treatment_plan_id = $scope.patient.treatmentplans[index].id;
-								}
-
-							};*/
 
 							$scope.setDetailView = function(id) {
 								$scope.lower_pane_view = id;
@@ -302,9 +271,14 @@ patientControllers.controller('NewAppointmentController', [
 			};
 									
 			$scope.getAppointments = function(id){
-				$scope.appointments = $appointment.query({
+				$appointment.query({
 					id : $routeParams.id
-				});
+				}, 
+				function(data){
+					$scope.appointments = data;
+					$scope.gridOptions.data = $scope.appointments;
+				}, 
+				function(){});
 			}
 			
 			$scope.getDoctors = function(){
@@ -315,7 +289,7 @@ patientControllers.controller('NewAppointmentController', [
 			
 			$scope.getDoctors();
 			$scope.getAppointments();
-			$scope.gridOptions.data = $scope.appointments;
+			
 			
 			$scope.submitForm = function() {
 				$scope.appointment.patientid = $routeParams.id;
@@ -327,8 +301,11 @@ patientControllers.controller('NewAppointmentController', [
 						// success callback
 						$location.url("patient/details/"
 								+ $scope.appointment.patientid);
-						$scope.appointments = {};
+						
+						// reload the data from server
 						$scope.getAppointments();
+						
+						// clear the form
 						$scope.appointment = {};
 					}, 
 					function(httpResponse) {

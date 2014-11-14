@@ -43,10 +43,12 @@
 		<div class="panel-heading">Appointment History</div>
 		<div class="panel-body" id="appointments">
 			<div id="appointment-grid" ui-grid="gridOptions" ui-grid-pagination class="grid"></div>
-			<div class="pull-right">
-				<a href="" ng-click="gridApi.pagination.previousPage()"><span class="glyphicon glyphicon-backward" ></span></a>	
-				<a href="" ng-click="gridApi.pagination.nextPage()"><span class="glyphicon glyphicon-forward" ></span></a>		
-			</div>
+			<nav>
+			  <ul class="pager">
+			    <li class="previous" ng-class="{disabled: gridApi.pagination.getPage() == 1}"><a href="" ng-click="gridApi.pagination.previousPage()"><span aria-hidden="true">&larr;</span> Older</a></li>
+			    <li class="next" ng-class="{disabled: gridApi.pagination.getPage() == gridApi.pagination.getTotalPages()}"><a href="" ng-click="gridApi.pagination.nextPage()">Newer <span aria-hidden="true">&rarr;</span></a></li>
+			  </ul>
+			</nav>			
 		</div>
 	</div>
 </form>

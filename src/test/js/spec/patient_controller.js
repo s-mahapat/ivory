@@ -1,6 +1,6 @@
 describe('Testing NewPatientController Controller', function() {
-	var scope=0, location=null, PatientResource=null;		
-
+	var scope=0, location=null, PatientResource=null;
+	
 	beforeEach(module('patientControllers', function($provide) {
 		PatientResource = jasmine.createSpyObj("PatientResource", ["save"]);		
 		/*PatientResource.save.andReturn({
@@ -18,6 +18,7 @@ describe('Testing NewPatientController Controller', function() {
 	
 	it('Checking submitForm() calls service save() method', function(){
 		//console.log(Object.getOwnPropertyNames(scope));
+		console.log(PatientResource);
 		PatientResource.save = function(nullval, data, success, failure){
 			var value = {
 					id: 1,

@@ -34,17 +34,18 @@ public class ManageAppointment {
 				tx.rollback();
 			log.fatal(e);
 		} finally {
-			session.flush();
+			//session.flush();
 			session.close();
 		}
 		return newappointment;
 	}
 	
 	public List<Appointment> getAppointmentList(int id) {
-		Session session = Hbutil.getSessionFactory().openSession();
+		Session session = Hbutil.getSessionFactory().openSession();		
 		List<Appointment> appointments = new ArrayList<Appointment>();
 		try {
 			Patient patient = (Patient) session.get(Patient.class, id);
+			session.refresh(patient);
 			appointments.addAll(patient.getAppointments());
 		} catch (HibernateException e) {
 			log.fatal(e);

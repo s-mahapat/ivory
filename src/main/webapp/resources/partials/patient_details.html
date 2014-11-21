@@ -2,31 +2,38 @@
 
 </script>
 <div>
-	<div class="col-lg-2">
-		<div class="list-group" ng-init="details.view = 1; dashboard = 1">
-			<a href="" ng-click="details.view = 1;dashboard = 1; appointments = 0; treatments = 0"
-				ng-model="dashboard" class="list-group-item" ng-class="{active: dashboard}">Dashboard</a>
-			<a href="" ng-click="details.view = 2; dashboard = 0; appointments = 1; treatments = 0"
-				ng-model="appointments" ng-value="2" class="list-group-item" ng-class="{active: appointments}">Appointments</a>
-			<a href="" ng-click="details.view = 3; dashboard = 0; appointments = 0; treatments = 1"
-				ng-model="treatments" ng-value="3" class="list-group-item" ng-class="{active: treatments}">Treatments</a>
-		</div>
+	<div class="col-lg-10" role="tabpanel">
+		<ul class="nav nav-tabs nav-justified" role="tablist" ng-init="details.view = 1; dashboard = 1; appointments_tab = 0; treatments = 0">
+			<li role="presentation" class="active"><a href="" data-target="#dashboard" data-toggle="tab" aria-controls="dashboard" role="tab" ng-click="details.view = 1;dashboard = 1; appointments_tab = 0; treatments = 0"
+				>Dashboard</a>
+				
+			</li>
+			<li role="presentation">
+				<a href="" data-toggle="tab" data-target="#appointment" role="tab" aria-controls="appointment" ng-click="details.view = 2; dashboard = 0; appointments_tab = 1; treatments = 0"
+				>Appointments</a>
+			</li>
+			<li role="presentation">
+				<a href="" data-toggle="tab" data-target="#treatment" role="tab" aria-controls="treatment" ng-click="details.view = 3; dashboard = 0; appointments_tab = 0; treatments = 1"
+				>Treatments</a>
+			</li>
+		</ul>
+		<div class="row">&nbsp;</div>
+		
+		<!-- Tab panes -->
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" ng-if="dashboard == 1" id="dashboard">
+	    	<ng-include src="'resources/partials/patient_dashboard.html'"></ng-include>
+	    </div>
+	    <div role="tabpanel" class="tab-pane active" ng-if="appointments_tab == 1" id="appointment">
+	    	<ng-include src="'resources/partials/patient_appointment.html'" ng-controller="PatientAppointmentController"></ng-include>
+	    </div>
+	    <div role="tabpanel" class="tab-pane active" ng-if="treatments == 1" id="treatment">
+	    	<ng-include src="'resources/partials/patient_treatment_history.html'" ng-controller="PatientTreatmentController"></ng-include>
+	    </div>
+	  </div>
 	</div>
-	<div class="col-lg-8" ng-if="details.view == 1">
-		<ng-include src="'resources/partials/patient_dashboard.html'"></ng-include>
-	</div>
-	<div class="col-lg-8" ng-if="details.view == 2" ng-controller="NewAppointmentController">
-		<ng-include src="'resources/partials/patient_appointment.html'"></ng-include>
-	</div>
-	<div class="col-lg-8" ng-if="details.view == 3" ng-controller="PatientTreatmentController">
-		<ng-include src="'resources/partials/patient_treatment_history.html'"></ng-include>
-	</div>
-	<!-- <div class="col-lg-8" ng-switch on="details.view">
-		<div class="panel panel-primary" ng-switch-default>Dashboard</div>
-		<div ng-switch-when="2">
-			<ng-include src="'resources/partials/patient_appointment_history.html'"></ng-include>
-		</div>
-	</div> -->
+	
+	
 	<div class="col-lg-2">
 		<div class="panel panel-primary">
 			<div class="panel-heading"></div>

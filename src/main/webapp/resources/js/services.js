@@ -22,7 +22,12 @@ ivoryServices.factory('TreatmentPlan', [ '$resource', function($resource) {
 		'update' : {
 			method : 'PUT',
 		},
-
+	},
+	{
+		'query':{
+			method: 'GET',
+			cache: true
+		}
 	});
 	return TreatmentPlan;
 } ]);

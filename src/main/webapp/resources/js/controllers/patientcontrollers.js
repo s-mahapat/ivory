@@ -260,7 +260,7 @@ patientControllers.controller(
 						} ]);
 
 
-patientControllers.controller('NewAppointmentController', [
+patientControllers.controller('PatientAppointmentController', [
 		'$scope',
 		'$routeParams',
 		'$location',
@@ -275,10 +275,10 @@ patientControllers.controller('NewAppointmentController', [
 			$scope.gridOptions = {
 				enableSorting : true,
 				enablePagination: true,
-				rowsPerPage: 5,
-				minRowsToShow: 5,
+				rowsPerPage: 10,
+				minRowsToShow: 10,
 				enableHorizontalScrollbar: false,
-				enableVerticalScrollbar: false,
+				enableVerticalScrollbar: true,
 				columnDefs : [
 				{
 					name : 'Date',
@@ -304,7 +304,12 @@ patientControllers.controller('NewAppointmentController', [
 			$scope.getAppointments = function(id){
 				$scope.appointments = $appointment.query({
 					id : $routeParams.id
-				});
+				}, 
+				function(data){
+					$scope.appointments = data;
+					$scope.gridOptions.data = data;
+				}, 
+				function(){});
 			}
 			
 			$scope.getDoctors = function(){
@@ -315,7 +320,7 @@ patientControllers.controller('NewAppointmentController', [
 			
 			$scope.getDoctors();
 			$scope.getAppointments();
-			$scope.gridOptions.data = $scope.appointments;
+			
 			
 			$scope.submitForm = function() {
 				$scope.appointment.patientid = $routeParams.id;

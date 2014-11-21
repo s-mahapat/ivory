@@ -1,20 +1,34 @@
-<div class="panel panel-primary">
-	<div class="panel-heading">Treatment History</div>
-	<div class="" id="appointments">
-		<div id="appointments-grid" ui-grid="gridOptions" ui-grid-pagination ui-grid-pinning ui-grid-expandable class="grid"></div>
-	</div>
-	<div class="panel-footer">
-		<div class="btn-group">
-			<button title="New treatment plan" type="button"
-				class="btn btn-default btn-xs" ng-click="addNew()">
-				<span class="glyphicon glyphicon-plus-sign ivory-theme-color"></span>
-			</button>
-			<button type="button" class="btn btn-default btn-xs">
-				<span class="glyphicon glyphicon-minus-sign ivory-theme-color"></span>
-			</button>
+<div class="col-lg-6 col-md-12 col-xs-12">
+	<div class="panel panel-primary">
+		<div class="panel-heading">Treatment History</div>
+		<div class="" id="treatments">
+			<div id="appointments-grid" ui-grid="gridOptions" ui-grid-pagination class="grid"></div>
+		</div>
+		<div class="panel-footer">
+			<div class="btn-group">
+				<button title="New treatment plan" type="button"
+					class="btn btn-default btn-xs" ng-click="addNew()">
+					<span class="glyphicon glyphicon-plus-sign ivory-theme-color"></span>
+				</button>
+				<button type="button" class="btn btn-default btn-xs">
+					<span class="glyphicon glyphicon-minus-sign ivory-theme-color"></span>
+				</button>
+			</div>
 		</div>
 	</div>
 </div>
+
+<div class="col-lg-6 col-md-12 col-xs-12">
+	<div class="panel panel-primary">
+		<div class="panel-heading">Treatment Details</div>
+		<div class="" id="appointments">
+			
+		</div>
+		<div class="panel-footer">
+		</div>
+	</div>
+</div>
+
 
 <div ng-switch on="lower_pane_view">
 	<!-- Hide this when the hide_details flag in the controller is set <div ng-switch-when="1" ng-hide="hide_details" class="panel panel-default ng-hide">-->
